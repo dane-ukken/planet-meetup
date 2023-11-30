@@ -7,6 +7,10 @@ This is a simple application that uses passport-local to authenticate users. It 
 ## Usage
 
 ```
+docker compose up -d
+npm install
+npm run build
+npm start
 
 ```
 
