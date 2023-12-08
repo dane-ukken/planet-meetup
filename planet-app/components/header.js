@@ -59,7 +59,7 @@ const Header = () => {
       </Head>
       <header>
         <nav className={headfont.className}>
-          <h1 class="site-name">planet</h1>
+          <h1 className="site-name">planet</h1>
           <ul>
             <li>
               <Link href="/" legacyBehavior>
@@ -86,52 +86,53 @@ const Header = () => {
             )}
           </ul>
         </nav>
-        <style jsx>{`
-          nav {
-            width: 100%;
-            margin: 0 0 2% 0;
-            background-color: black;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-          }
-          h1 {
-            text-shadow: 2px 2px 2px lightblue;
-            font-size: 3em;
-            margin: 0 0 0 2%;
-            display: inline;
-            // border: 2px solid red;
-          }
-          ul {
-            display: flex;
-            list-style: none;
-            margin-left: 0;
-            padding-left: 0;
-            padding-right: 2%;
-            // border: 2px solid red;
-            font-size: 1.5em;
-          }
-          li {
-            margin-right: 2rem;
-          }
-          li:first-child {
-            margin-left: auto;
-          }
-          li:last-child {
-            margin-right: 0;
-          }
-          a {
-            color: #fff;
-            text-decoration: none;
-          }
-          header {
-            color: #fff;
-            background-color: black;
-            margin-top: 0;
-            // border: 2px solid red;
-          }
-        `}</style>
       </header>
+
+      <style jsx>{`
+        nav {
+          width: 100%;
+          margin: 0 0 2% 0;
+          background-color: black;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        h1 {
+          text-shadow: 2px 2px 2px lightblue;
+          font-size: 3em;
+          margin: 0 0 0 2%;
+          display: inline;
+          // border: 2px solid red;
+        }
+        ul {
+          display: flex;
+          list-style: none;
+          margin-left: 0;
+          padding-left: 0;
+          padding-right: 2%;
+          // border: 2px solid red;
+          font-size: 1.5em;
+        }
+        li {
+          margin-right: 2rem;
+        }
+        li:first-child {
+          margin-left: auto;
+        }
+        li:last-child {
+          margin-right: 0;
+        }
+        a {
+          color: #fff;
+          text-decoration: none;
+        }
+        header {
+          color: #fff;
+          background-color: black;
+          margin-top: 0;
+          // border: 2px solid red;
+        }
+      `}</style>
     </>
   );
 };

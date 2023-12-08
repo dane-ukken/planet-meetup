@@ -4,7 +4,7 @@ import Header from "./header";
 const Layout = (props) => (
   <>
     <Head>
-      <title>WPL Assignment 4</title>
+      <title>Planet - Yout launchpad to great events</title>
     </Head>
 
     <Header />

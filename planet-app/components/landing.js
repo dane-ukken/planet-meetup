@@ -1,18 +1,18 @@
 import Head from "next/head";
 import Header from "./header";
-import Image from "next/image"; 
+import Image from "next/image";
 
 const Landing = () => (
   <>
     <main></main>
-    <body>
-      <h1>Your launchpad to great events.</h1>
-      <p>Sign in to proceed.</p>
-      <Image
-        src="http://localhost:3000/../images/earth-png-25612.png"
-        alt="Earth Image"
-      />
-    </body>
+    <h1>Your launchpad to great events.</h1>
+    <p>Sign in to proceed.</p>
+    <Image
+      src="/images/earth-png-25612.png"
+      alt="Earth Image"
+      width={500}
+      height={500}
+    />
 
     <style jsx global>{`
       *,
