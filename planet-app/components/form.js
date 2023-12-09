@@ -15,6 +15,7 @@ const Form = ({
     email: "",
     address: "",
     phone: "",
+    role: "user",
   });
   const [isPasswordMatch, setIsPasswordMatch] = useState(false);
 
@@ -110,6 +111,18 @@ const Form = ({
               onChange={handleChange}
               required
             />
+          </label>
+          <label>
+            <div style={{ display: "flex" }}>
+              <input
+                type="checkbox"
+                name="role"
+                value={formFields.role}
+                onChange={handleChange}
+                required
+              />
+              <span style={{ marginLeft: "1%" }}> Sign up as organizer</span>
+            </div>
           </label>
         </>
       )}

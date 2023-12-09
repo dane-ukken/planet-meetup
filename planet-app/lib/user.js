@@ -8,6 +8,7 @@ export async function createUser({
   phone,
   address,
   password,
+  role
 }) {
   await dbConnect();
 
@@ -22,6 +23,7 @@ export async function createUser({
     email,
     phone,
     address,
+    role,
     hash,
     salt,
   });

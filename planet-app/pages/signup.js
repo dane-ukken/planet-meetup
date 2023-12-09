@@ -21,6 +21,7 @@ const Signup = () => {
       phone: e.currentTarget.phone.value,
       address: e.currentTarget.address.value,
       password: e.currentTarget.password.value,
+      role: e.currentTarget.role.checked ? "admin" : "user",
     };
 
     // password and repeat password must match

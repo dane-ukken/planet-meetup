@@ -48,6 +48,19 @@ const Home = () => {
     },
   ];
 
+  const admin_list = [
+    {
+      title: "Orange",
+      img: "/images/xmas.jpeg",
+      price: "$5.50",
+    },
+    {
+      title: "Tangerine",
+      img: "/images/xmas.jpeg",
+      price: "$3.00",
+    },
+  ];
+
   return (
     <Layout>
       {user ? (
@@ -55,7 +68,9 @@ const Home = () => {
           <h1>Welcome, {user.username}!</h1>
 
           <p>You are signed in.</p>
-          <EventCard itemList={list}></EventCard>
+          <EventCard
+            itemList={user.role == "admin" ? admin_list : list}
+          ></EventCard>
         </>
       ) : (
         <>

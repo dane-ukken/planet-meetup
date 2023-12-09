@@ -10,13 +10,14 @@ export default async function user(req, res) {
       return res.status(200).json({ user });
     }
 
-    const { username, email, phone, address, createdAt } = user || {};
+    const { username, email, phone, address, role, createdAt } = user || {};
     res.status(200).json({
       user: {
         username,
         email,
         phone,
         address,
+        role,
         createdAt,
       },
     });
