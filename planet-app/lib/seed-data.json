@@ -7,7 +7,8 @@
     "eventLocation": "Location A",
     "eventStatus": "confirmed",
     "maxAttendees": 50,
-    "eventOrg": "Organization X"
+    "eventOrg": "Organization X",
+    "eventDescription": "Exploring Event 1"
   },
   {
     "createdAt": "2023-12-09T08:30:00.000Z",
@@ -17,7 +18,8 @@
     "eventLocation": "Location B",
     "eventStatus": "pending",
     "maxAttendees": 70,
-    "eventOrg": "Organization Y"
+    "eventOrg": "Organization Y",
+    "eventDescription": "Exploring Event 2"
   },
   {
     "createdAt": "2023-12-09T09:00:00.000Z",
@@ -27,7 +29,8 @@
     "eventLocation": "Location C",
     "eventStatus": "confirmed",
     "maxAttendees": 80,
-    "eventOrg": "Organization Z"
+    "eventOrg": "Organization Z",
+    "eventDescription": "Exploring Event 3"
   },
   {
     "createdAt": "2023-12-09T09:30:00.000Z",
@@ -37,7 +40,8 @@
     "eventLocation": "Location A",
     "eventStatus": "cancelled",
     "maxAttendees": 60,
-    "eventOrg": "Organization X"
+    "eventOrg": "Organization X",
+    "eventDescription": "Exploring Event 4"
   },
   {
     "createdAt": "2023-12-09T10:00:00.000Z",
@@ -47,6 +51,7 @@
     "eventLocation": "Location B",
     "eventStatus": "confirmed",
     "maxAttendees": 90,
-    "eventOrg": "Organization Y"
+    "eventOrg": "Organization Y",
+    "eventDescription": "Exploring Event 5"
   }
 ]

@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import dbConnect from "../lib/db";
 
 const eventSchema = new mongoose.Schema({
   createdAt: { type: Date, required: true },
@@ -10,9 +9,10 @@ const eventSchema = new mongoose.Schema({
   eventStatus: { type: String, required: true },
   maxAttendees: { type: Number },
   eventOrg: { type: String, required: true },
+  eventDescription: { type: String, required: true }
 });
-// const cnt = await dbConnect();
-// const wplA4Db = mongoose.connection.useDb("wpl-a4-db");
-// // const wplA4Db = cnt.useDb("wpl-a4-db");
 
-// export default wplA4Db.models.Event || wplA4Db.model("Event", eventSchema);
+const wplA4Db = mongoose.connection.useDb("wpl-a4-db");
+
+export default wplA4Db.models.Event || wplA4Db.model("Event", eventSchema);
+

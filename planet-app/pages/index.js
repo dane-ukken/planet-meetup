@@ -2,7 +2,6 @@ import { useUser } from "../lib/hooks";
 import Layout from "../components/layout";
 import Landing from "../components/landing";
 import EventCard from "../components/eventcard";
-import seedInitialData from "../lib/load-data";
 import { useState, useEffect } from "react";
 
 const Home = () => {
