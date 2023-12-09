@@ -64,6 +64,13 @@ const Home = () => {
       )}
 
       <style jsx>{`
+        html,
+        body,
+        #__next {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        }
         h1 {
           font-size: 2.2rem;
           font-weight: 600;

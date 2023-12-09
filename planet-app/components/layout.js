@@ -1,10 +1,11 @@
 import Head from "next/head";
 import Header from "./header";
+import Footer from "./footer";
 
 const Layout = (props) => (
   <>
     <Head>
-      <title>Planet - Yout launchpad to great events</title>
+      <title>Planet - Yout launchpad to great!</title>
     </Head>
 
     <Header />
@@ -13,12 +14,25 @@ const Layout = (props) => (
       <div className="container">{props.children}</div>
     </main>
 
+    <Footer />
+
     <style jsx global>{`
       *,
       *::before,
       *::after {
         box-sizing: border-box;
       }
+      html,
+      body,
+      #__next {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      footer {
+        margin-top: auto;
+      }
+
       body {
         margin: 0;
         color: #333;

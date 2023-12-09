@@ -2,7 +2,6 @@ import Link from "next/link";
 import { useUser } from "../lib/hooks";
 import Router from "next/router";
 import { useCallback, useEffect, useRef } from "react";
-import Head from "next/head";
 import { Vina_Sans } from "next/font/google";
 const headfont = Vina_Sans({
   subsets: ["latin"],
@@ -10,57 +9,14 @@ const headfont = Vina_Sans({
   weight: ["400"],
 });
 
-const Header = () => {
+const Footer = () => {
   const user = useUser();
-
-  const logoutTimer = useRef(null);
-  const TIMER_1_MINUTE = 1000 * 60;
-  const TIMER_1_HOUR = TIMER_1_MINUTE * 60;
-  const events = [
-    "mousemove",
-    "mousedown",
-    "touchstart",
-    "scroll",
-    "resize",
-    "focus",
-    "click",
-    "keydown",
-  ];
-
-  const logoutDueToInactivity = useCallback(() => {
-    console.log("Logout due to inactivity");
-    Router.push("/api/logout");
-  }, []);
-
-  useEffect(() => {
-    const handleActivity = () => {
-      clearTimeout(logoutTimer.current);
-      logoutTimer.current = setTimeout(logoutDueToInactivity, TIMER_1_HOUR);
-    };
-
-    if (user) {
-      events.forEach((event) => window.addEventListener(event, handleActivity));
-
-      // Set initial timer
-      logoutTimer.current = setTimeout(logoutDueToInactivity, TIMER_1_HOUR);
-    }
-
-    return () => {
-      clearTimeout(logoutTimer.current);
-      events.forEach((event) =>
-        window.removeEventListener(event, handleActivity)
-      );
-    };
-  }, [logoutDueToInactivity, user]);
 
   return (
     <>
-      <Head>
-        <title>Landing Page</title>
-      </Head>
-      <header>
+      <footer>
         <nav className={headfont.className}>
-          <h1 className="site-name">planet</h1>
+          <h1 className="site-name">Footer</h1>
           <ul>
             <li>
               <Link href="/" legacyBehavior>
@@ -80,19 +36,19 @@ const Header = () => {
               </>
             ) : (
               <li>
-                <Link href="/login" legacyBehavior>
-                  <a>Login</a>
+                <Link href="/about" legacyBehavior>
+                  <a>About</a>
                 </Link>
               </li>
             )}
           </ul>
         </nav>
-      </header>
+      </footer>
 
       <style jsx>{`
         nav {
           width: 100%;
-          margin: 0 0 2% 0;
+          margin: 0 0 0 0;
           background-color: black;
           display: flex;
           align-items: center;
@@ -127,15 +83,9 @@ const Header = () => {
           color: #fff;
           text-decoration: none;
         }
-        header {
-          color: #fff;
-          background-color: black;
-          margin-top: 0;
-          // border: 2px solid red;
-        }
       `}</style>
     </>
   );
 };
 
-export default Header;
+export default Footer;

@@ -7,12 +7,14 @@ const Landing = () => (
     <main></main>
     <h1>Your launchpad to great events.</h1>
     <p>Sign in to proceed.</p>
-    <Image
-      src="/images/earth-png-25612.png"
-      alt="Earth Image"
-      width={500}
-      height={500}
-    />
+    <div className="landing-image-container">
+      <Image
+        src="/images/earth-png-25612.png"
+        alt="Earth Image"
+        width={500}
+        height={500}
+      />
+    </div>
 
     <style jsx global>{`
       *,
@@ -43,6 +45,11 @@ const Landing = () => (
         font-family: "Open Sans", sans-serif;
         color: grey;
         text-align: center;
+      }
+      .landing-image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     `}</style>
   </>
