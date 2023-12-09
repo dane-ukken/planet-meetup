@@ -8,7 +8,9 @@
     "eventStatus": "confirmed",
     "maxAttendees": 50,
     "eventOrg": "Organization X",
-    "eventDescription": "Exploring Event 1"
+    "eventDescription": "Exploring Event 1",
+    "eventPrice": 50,
+    "eventImgUrl": "/images/event1.jpeg"
   },
   {
     "createdAt": "2023-12-09T08:30:00.000Z",
@@ -19,7 +21,9 @@
     "eventStatus": "pending",
     "maxAttendees": 70,
     "eventOrg": "Organization Y",
-    "eventDescription": "Exploring Event 2"
+    "eventDescription": "Exploring Event 2",
+    "eventPrice": 60,
+    "eventImgUrl": "/images/event3.jpeg"
   },
   {
     "createdAt": "2023-12-09T09:00:00.000Z",
@@ -30,7 +34,9 @@
     "eventStatus": "confirmed",
     "maxAttendees": 80,
     "eventOrg": "Organization Z",
-    "eventDescription": "Exploring Event 3"
+    "eventDescription": "Exploring Event 3",
+    "eventPrice": 70,
+    "eventImgUrl": "/images/event3.jpeg"
   },
   {
     "createdAt": "2023-12-09T09:30:00.000Z",
@@ -41,7 +47,9 @@
     "eventStatus": "cancelled",
     "maxAttendees": 60,
     "eventOrg": "Organization X",
-    "eventDescription": "Exploring Event 4"
+    "eventDescription": "Exploring Event 4",
+    "eventPrice": 80,
+    "eventImgUrl": "/images/event4.jpeg"
   },
   {
     "createdAt": "2023-12-09T10:00:00.000Z",
@@ -52,6 +60,8 @@
     "eventStatus": "confirmed",
     "maxAttendees": 90,
     "eventOrg": "Organization Y",
-    "eventDescription": "Exploring Event 5"
+    "eventDescription": "Exploring Event 5",
+    "eventPrice": 90,
+    "eventImgUrl": "/images/event5.jpeg"
   }
 ]

@@ -6,29 +6,24 @@ import { useState, useEffect } from "react";
 
 const Home = () => {
   const user = useUser();
-  // const [list, setList] = useState([]);
-  //Insert Initial data in DB
-  // (async () => {
-  //   await seedInitialData();
-  // })();
+  const [list, setList] = useState([]);
 
-  // useEffect(() => {
-  //   // Fetch the seed data here from your endpoint
-  //   fetch("/api/events") // Replace '/api/getSeedData' with your actual endpoint
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log("Received events", data);
-  //       setList(data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching seed data:", error);
-  //     });
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/events");
+        const data = await response.json();
+        console.log("Received events", data);
+        setList(data);
+      } catch (error) {
+        console.error("Error fetching seed data:", error);
+      }
+    };
 
-  //   // // Simulate user data - replace this with your user authentication logic
-  //   // setUser({ username: 'John Doe', role: 'admin' }); // Example user object
-  // }, []);
+    fetchData();
+  }, []);
 
-  const list = [
+/*   const list = [
     {
       title: "Orange",
       img: "/images/xmas.jpeg",
@@ -70,7 +65,8 @@ const Home = () => {
       price: "$12.20",
     },
   ];
-
+ */
+  
   const admin_list = [
     {
       title: "Event1",
@@ -83,6 +79,8 @@ const Home = () => {
       price: "$3.00",
     },
   ];
+
+  console.log(list);
 
   return (
     <Layout>

@@ -8,6 +8,8 @@ const eventSchema = new mongoose.Schema({
   eventLocation: { type: String, required: true },
   eventStatus: { type: String, required: true },
   maxAttendees: { type: Number },
+  eventPrice: { type: Number, required: true },
+  eventImgUrl: { type: String, required: true },
   eventOrg: { type: String, required: true },
   eventDescription: { type: String, required: true }
 });

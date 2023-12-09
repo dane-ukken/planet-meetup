@@ -17,14 +17,14 @@ const EventCard = ({ itemList }) => {
               shadow="sm"
               radius="lg"
               width="100%"
-              alt={item.title}
+              alt={item.eventName}
               className="w-full object-cover h-[140px]"
-              src={item.img}
+              src={item.eventImgUrl}
             />
           </CardBody>
           <CardFooter className="text-small justify-between">
-            <b>{item.title}</b>
-            <p className="text-default-500">{item.price}</p>
+            <b>{item.eventName}</b>
+            <p className="text-default-500">{item.eventPrice}</p>
           </CardFooter>
         </Card>
       ))}

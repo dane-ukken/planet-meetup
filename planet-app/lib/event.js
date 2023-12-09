@@ -46,6 +46,7 @@ export async function getEvents() {
   return Event.find({})
     .then((events) => {
       console.log(`found events`);
+      console.log(events);
       return events;
     })
     .catch((err) => {
