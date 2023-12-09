@@ -1,0 +1,52 @@
+[
+  {
+    "createdAt": "2023-12-09T08:00:00.000Z",
+    "eventName": "Event 1",
+    "eventDate": "2023-12-15T00:00:00.000Z",
+    "eventTime": "14:00",
+    "eventLocation": "Location A",
+    "eventStatus": "confirmed",
+    "maxAttendees": 50,
+    "eventOrg": "Organization X"
+  },
+  {
+    "createdAt": "2023-12-09T08:30:00.000Z",
+    "eventName": "Event 2",
+    "eventDate": "2023-12-18T00:00:00.000Z",
+    "eventTime": "10:00",
+    "eventLocation": "Location B",
+    "eventStatus": "pending",
+    "maxAttendees": 70,
+    "eventOrg": "Organization Y"
+  },
+  {
+    "createdAt": "2023-12-09T09:00:00.000Z",
+    "eventName": "Event 3",
+    "eventDate": "2023-12-20T00:00:00.000Z",
+    "eventTime": "16:00",
+    "eventLocation": "Location C",
+    "eventStatus": "confirmed",
+    "maxAttendees": 80,
+    "eventOrg": "Organization Z"
+  },
+  {
+    "createdAt": "2023-12-09T09:30:00.000Z",
+    "eventName": "Event 4",
+    "eventDate": "2023-12-22T00:00:00.000Z",
+    "eventTime": "11:00",
+    "eventLocation": "Location A",
+    "eventStatus": "cancelled",
+    "maxAttendees": 60,
+    "eventOrg": "Organization X"
+  },
+  {
+    "createdAt": "2023-12-09T10:00:00.000Z",
+    "eventName": "Event 5",
+    "eventDate": "2023-12-25T00:00:00.000Z",
+    "eventTime": "18:00",
+    "eventLocation": "Location B",
+    "eventStatus": "confirmed",
+    "maxAttendees": 90,
+    "eventOrg": "Organization Y"
+  }
+]

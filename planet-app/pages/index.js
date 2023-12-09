@@ -2,9 +2,33 @@ import { useUser } from "../lib/hooks";
 import Layout from "../components/layout";
 import Landing from "../components/landing";
 import EventCard from "../components/eventcard";
+import seedInitialData from "../lib/load-data";
+import { useState, useEffect } from "react";
 
 const Home = () => {
   const user = useUser();
+  // const [list, setList] = useState([]);
+  //Insert Initial data in DB
+  // (async () => {
+  //   await seedInitialData();
+  // })();
+
+  // useEffect(() => {
+  //   // Fetch the seed data here from your endpoint
+  //   fetch("/api/events") // Replace '/api/getSeedData' with your actual endpoint
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log("Received events", data);
+  //       setList(data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching seed data:", error);
+  //     });
+
+  //   // // Simulate user data - replace this with your user authentication logic
+  //   // setUser({ username: 'John Doe', role: 'admin' }); // Example user object
+  // }, []);
+
   const list = [
     {
       title: "Orange",
@@ -50,12 +74,12 @@ const Home = () => {
 
   const admin_list = [
     {
-      title: "Orange",
+      title: "Event1",
       img: "/images/xmas.jpeg",
       price: "$5.50",
     },
     {
-      title: "Tangerine",
+      title: "Event2",
       img: "/images/xmas.jpeg",
       price: "$3.00",
     },
