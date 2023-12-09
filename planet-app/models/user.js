@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
   address: { type: String, required: true },
   role: { type: String, required: true },
   cart: { type: mongoose.Schema.Types.Mixed },
-
+  registered_events: { type: mongoose.Schema.Types.Mixed },
   hash: { type: String, required: true },
   salt: { type: String, required: true },
 });
