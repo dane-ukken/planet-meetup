@@ -9,7 +9,7 @@
     "eventStatus": "confirmed",
     "maxAttendees": 80,
     "eventOrg": "Organization Z",
-    "eventDescription": "Exploring Event 3",
+    "eventDescription": "Description of Midnight Hike",
     "eventPrice": 70,
     "eventImgUrl": "/images/event3.jpeg"
   },
@@ -23,7 +23,7 @@
     "eventStatus": "confirmed",
     "maxAttendees": 50,
     "eventOrg": "admin",
-    "eventDescription": "Exploring Event 1",
+    "eventDescription": "Description of Sunrise Hike",
     "eventPrice": 50,
     "eventImgUrl": "/images/event1.jpeg"
   },
@@ -37,7 +37,7 @@
     "eventStatus": "cancelled",
     "maxAttendees": 70,
     "eventOrg": "Organization Y",
-    "eventDescription": "Exploring Event 2",
+    "eventDescription": "Description of Sunset Hike",
     "eventPrice": 60,
     "eventImgUrl": "/images/event3.jpeg"
   },
@@ -51,7 +51,7 @@
     "eventStatus": "cancelled",
     "maxAttendees": 60,
     "eventOrg": "admin",
-    "eventDescription": "Exploring Event 4",
+    "eventDescription": "Description of Evening Hike",
     "eventPrice": 80,
     "eventImgUrl": "/images/event4.jpeg"
   },
@@ -65,7 +65,7 @@
     "eventStatus": "confirmed",
     "maxAttendees": 90,
     "eventOrg": "Organization Y",
-    "eventDescription": "Exploring Event 5",
+    "eventDescription": "Description of Afternoon Hike",
     "eventPrice": 90,
     "eventImgUrl": "/images/event5.jpeg"
   },
@@ -79,7 +79,7 @@
     "eventStatus": "confirmed",
     "maxAttendees": 90,
     "eventOrg": "Organization Y",
-    "eventDescription": "Exploring Event 5",
+    "eventDescription": "Description of Mid Day Hike",
     "eventPrice": 90,
     "eventImgUrl": "/images/event5.jpeg"
   }

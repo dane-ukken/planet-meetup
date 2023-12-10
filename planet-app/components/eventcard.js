@@ -20,7 +20,7 @@ const EventCard = ({ itemList }) => {
           location={item.eventLocation}
           imageUrl={item.eventImgUrl}
           price={`$${item.eventPrice}`}
-          iconName="add_shopping_cart"
+          iconName="add"
           onIconClick={(e) => {
             e.stopPropagation();
             handleAddToCart(item._id);

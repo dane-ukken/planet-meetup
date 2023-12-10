@@ -35,12 +35,17 @@ const EventDetails = () => {
     <Layout>
       <h1>{event.eventName}</h1>
       <img src={event.eventImgUrl} alt={event.eventName} />
+
+      <p className="description">{event.eventDescription}</p>
+
       <p>
         {formatDate(event.eventDate)} at {formatTime(event.eventTime)}
       </p>
       <p>{event.eventLocation}</p>
 
       <p style={{ fontSize: "1.3rem" }}>${event.eventPrice} per seat</p>
+
+      <button>Buy Ticket</button>
 
       <style jsx>{`
         h1 {
@@ -53,11 +58,24 @@ const EventDetails = () => {
           font-size: 1rem;
           marginbottom: 1rem;
         }
+        .description {
+          font-size: 1.2rem;
+          margin-bottom: 2rem;
+        }
         img {
           width: 100%;
           height: 300px;
           object-fit: cover;
           margin-bottom: 1rem;
+        }
+        button {
+          padding: 0.5rem 1rem;
+          font-size: 1.2rem;
+          background-color: #333;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
         }
 
         @media (max-width: 600px) {
