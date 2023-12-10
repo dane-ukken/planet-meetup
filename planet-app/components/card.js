@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import "material-icons/iconfont/material-icons.css";
 import { formatDate, formatTime } from "../lib/common";
 
@@ -11,28 +12,34 @@ const Card = ({
   price,
   iconName,
   onIconClick,
+  onClickLink,
 }) => {
   return (
-    <div className="card">
-      {imageUrl && (
-        <div className="card-image">
-          <img src={imageUrl} alt={title} />
+    <>
+      <Link href={onClickLink} legacyBehavior>
+        <div className="card">
+          {imageUrl && (
+            <div className="card-image">
+              <img src={imageUrl} alt={title} />
+            </div>
+          )}
+          <div className="card-content">
+            <h3>{title}</h3>
+            <p className="card-date">
+              {formatDate(date)} at {formatTime(time)}
+            </p>
+            {location && <p className="card-location">{location}</p>}
+          </div>
+          {iconName && (
+            <div className="card-action">
+              <p>{price}</p>
+              <button onClick={onIconClick}>
+                <span className="material-icons">{iconName}</span>
+              </button>
+            </div>
+          )}
         </div>
-      )}
-      <div className="card-content">
-        <h3>{title}</h3>
-        {date && <p className="card-date">{formatDate(date)}</p>}
-        {time && <p className="card-time">{formatTime(time)}</p>}
-        {location && <p className="card-location">{location}</p>}
-      </div>
-      {iconName && (
-        <div className="card-action">
-          <p>{price}</p>
-          <button onClick={onIconClick}>
-            <span className="material-icons">{iconName}</span>
-          </button>
-        </div>
-      )}
+      </Link>
 
       <style jsx>{`
         p {
@@ -110,7 +117,7 @@ const Card = ({
           }
         }
       `}</style>
-    </div>
+    </>
   );
 };
 

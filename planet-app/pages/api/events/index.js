@@ -1,4 +1,4 @@
-import { getEvents } from "../../lib/event";
+import { getEvents } from "../../../lib/event";
 
 export default async function getEventsHandler(req, res) {
   try {

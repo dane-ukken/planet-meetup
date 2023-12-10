@@ -54,3 +54,18 @@ export async function getEvents() {
       return null;
     });
 }
+
+export async function getEventById(id) {
+  await dbConnect();
+
+  return Event.findById(id)
+    .then((event) => {
+      console.log(`found event`);
+      console.log(event);
+      return event;
+    })
+    .catch((err) => {
+      console.log(err);
+      return null;
+    });
+}

@@ -11,6 +11,8 @@ const UserHome = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (events && events.length > 0) return;
+
     dispatch(fetchEvents());
   }, [dispatch]);
 

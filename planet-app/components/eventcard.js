@@ -5,6 +5,10 @@ const EventCard = ({ itemList }) => {
     return <p>No events available.</p>;
   }
 
+  const handleAddToCart = (id) => {
+    console.log(id + " added to cart.");
+  };
+
   return (
     <div className="event-grid">
       {itemList.map((item, index) => (
@@ -17,9 +21,11 @@ const EventCard = ({ itemList }) => {
           imageUrl={item.eventImgUrl}
           price={`$${item.eventPrice}`}
           iconName="add_shopping_cart"
-          onIconClick={() => {
-            console.log(item._id + " added to cart");
+          onIconClick={(e) => {
+            e.stopPropagation();
+            handleAddToCart(item._id);
           }}
+          onClickLink={`/events/${item._id}`}
         />
       ))}
 
