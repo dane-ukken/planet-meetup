@@ -42,28 +42,28 @@ const EventDetails = () => {
 
   const event = events.find((e) => e._id === id);
 
-  const handleEditClick = (id) => {
+  const handleEditClick = () => {
     router.push(`/events/${id}/edit`);
   };
 
-  const handleDeleteClick = async (id) => {
+  const handleDeleteClick = async () => {
     // await fetch(`/events/${id}`); method: DELETE
     // router.push("/admin-dashboard");
   };
 
-  const handleViewAttendeesClick = (id) => {
+  const handleViewAttendeesClick = () => {
     router.push(`/events/${id}/attendees`);
   };
 
-  const handleAddToCartClick = async (id) => {
+  const handleAddToCartClick = async () => {
     // await fetch(`/add-to-cart`); method: POST body: { userId: user._id, eventId: event._id }
   };
 
-  const handleRemoveFromCartClick = async (id) => {
+  const handleRemoveFromCartClick = async () => {
     // await fetch(`/remove-from-cart`); method: POST body: { userId: user._id, eventId: event._id }
   };
 
-  const handleUnRegisterClick = async (id) => {
+  const handleUnRegisterClick = async () => {
     // await fetch(`/events/unregister`); method: POST body: { userId: user._id, eventId: event._id }
   };
 
@@ -80,15 +80,9 @@ const EventDetails = () => {
         </div>
         {user.role === "admin" && (
           <div className="admin-buttons">
-            <button onClick={() => handleEditClick(event._id)}>
-              Edit Event
-            </button>
-            <button onClick={() => handleDeleteClick(event._id)}>
-              Delete Event
-            </button>
-            <button onClick={() => handleViewAttendeesClick(event._id)}>
-              View Attendees
-            </button>
+            <button onClick={handleEditClick}>Edit Event</button>
+            <button onClick={handleDeleteClick}>Delete Event</button>
+            <button onClick={handleViewAttendeesClick}>View Attendees</button>
           </div>
         )}
       </div>
@@ -119,17 +113,13 @@ const EventDetails = () => {
       {user.role === "user" && (
         <div className="user-buttons">
           {isRegistered ? (
-            <button onClick={() => handleUnRegisterClick(event._id)}>
-              Unregister
-            </button>
+            <button onClick={handleUnRegisterClick}>Unregister</button>
           ) : inCart ? (
-            <button onClick={() => handleRemoveFromCartClick(event._id)}>
+            <button onClick={handleRemoveFromCartClick}>
               Remove from Cart
             </button>
           ) : (
-            <button onClick={() => handleAddToCartClick(event._id)}>
-              Add to Cart
-            </button>
+            <button onClick={handleAddToCartClick}>Add to Cart</button>
           )}
         </div>
       )}
