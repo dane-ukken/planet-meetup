@@ -21,6 +21,7 @@ const EventCard = ({ itemList }) => {
           imageUrl={item.eventImgUrl}
           price={`$${item.eventPrice}`}
           spotsLeft={item.spotsLeft}
+          isCancelled={item.eventStatus === "cancelled"}
           iconName="add"
           onIconClick={(e) => {
             e.stopPropagation();

@@ -41,6 +41,7 @@ const EventDetails = () => {
   if (!events) return <p>No event details available.</p>;
 
   const event = events.find((e) => e._id === id);
+  const isCancelled = event.eventStatus === "cancelled";
 
   const handleEditClick = () => {
     router.push(`/events/${id}/edit`);
@@ -88,7 +89,11 @@ const EventDetails = () => {
       </div>
 
       <h1>{event.eventName}</h1>
-      <img src={event.eventImgUrl} alt={event.eventName} />
+
+      <div className="image-container">
+        <img src={event.eventImgUrl} alt={event.eventName} />
+        {isCancelled && <div className="cancelled-overlay">Cancelled</div>}
+      </div>
 
       <p style={{ margin: "1rem 0" }} className="description">
         {event.eventDescription}
@@ -125,10 +130,40 @@ const EventDetails = () => {
       )}
 
       <style jsx>{`
+        .image-container {
+          position: relative;
+          width: 100%;
+          height: 300px;
+        }
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        .cancelled-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(
+            255,
+            0,
+            0,
+            0.6
+          ); // Semi-transparent red overlay
+          color: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
         .top-bar {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
+          margin-bottom: 2rem;
         }
         .back-button {
           background-color: transparent;
@@ -139,6 +174,8 @@ const EventDetails = () => {
           display: flex;
           align-items: center;
           justify-content: center;
+          padding: 0.75rem 1rem;
+          margin: 0;
         }
         h1 {
           font-size: 2.2rem;
@@ -149,10 +186,10 @@ const EventDetails = () => {
         .admin-buttons {
           display: flex;
           justify-content: flex-end;
-          margin-bottom: 1rem;
         }
         .admin-buttons button {
           margin-right: 1rem;
+          padding: 0.75rem 1rem;
         }
         .user-buttons {
           display: flex;
@@ -170,15 +207,9 @@ const EventDetails = () => {
           font-size: 1.2rem;
           margin-bottom: 2rem;
         }
-        img {
-          width: 100%;
-          height: 300px;
-          object-fit: cover;
-          margin-bottom: 1rem;
-        }
         button {
           padding: 0.5rem 1rem;
-          font-size: 1.2rem;
+          font-size: 1rem;
           background-color: #333;
           color: #fff;
           border: none;

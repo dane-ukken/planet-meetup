@@ -11,6 +11,7 @@ const Card = ({
   spotsLeft,
   imageUrl,
   price,
+  isCancelled,
   iconName,
   onIconClick,
   onClickLink,
@@ -22,6 +23,9 @@ const Card = ({
           {imageUrl && (
             <div className="card-image">
               <img src={imageUrl} alt={title} />
+              {isCancelled && (
+                <div className="cancelled-overlay">Cancelled</div>
+              )}
             </div>
           )}
           <div className="card-content">
@@ -48,6 +52,23 @@ const Card = ({
       <style jsx>{`
         p {
           margin: 5px 0;
+        }
+        .card-image {
+          position: relative;
+        }
+        .cancelled-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 99%;
+          background-color: rgba(255, 0, 0, 0.6);
+          color: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 1.5rem;
+          font-weight: bold;
         }
         .card {
           max-width: 300px;

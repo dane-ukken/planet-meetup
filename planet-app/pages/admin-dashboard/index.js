@@ -4,7 +4,7 @@ import EventCard from "../../components/eventcard";
 import { useUser } from "../../lib/hooks";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchEvents } from "../../store/features/events/eventSlice";
+import { fetchEventsAdmin } from "../../store/features/events/eventSlice";
 
 const AdminHome = () => {
   const user = useUser({ redirectTo: "/" });
@@ -15,7 +15,7 @@ const AdminHome = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchEvents());
+    dispatch(fetchEventsAdmin());
   }, [dispatch]);
 
   if (!user || user.role !== "admin") {
@@ -83,7 +83,7 @@ const AdminHome = () => {
         .admin-buttons {
           display: flex;
           justify-content: flex-end;
-          margin-bottom: 1rem;
+          margin-bottom: 2rem;
         }
         .admin-buttons button {
           margin-right: 1rem;
@@ -92,8 +92,8 @@ const AdminHome = () => {
           margin-right: 0;
         }
         button {
-          padding: 0.5rem 1rem;
-          font-size: 1.2rem;
+          padding: 0.75rem 1rem;
+          font-size: 1rem;
           background-color: #333;
           color: #fff;
           border: none;

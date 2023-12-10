@@ -37,7 +37,7 @@ const EventAttendees = () => {
   return (
     <Layout>
       <div className="top-bar">
-        <div style={{ margin: "0" }}>
+        <div>
           <button
             className="back-button"
             onClick={() => router.push(`/events/${id}`)}
@@ -99,8 +99,8 @@ const EventAttendees = () => {
           margin-bottom: 1rem;
         }
         button {
-          padding: 0.5rem 1rem;
-          font-size: 1.2rem;
+          padding: 0.75rem 1rem;
+          font-size: 1rem;
           background-color: #333;
           color: #fff;
           border: none;
