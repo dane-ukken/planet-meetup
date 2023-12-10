@@ -1,4 +1,5 @@
 import Layout from "../../components/layout";
+import Router from "next/router";
 import EventCard from "../../components/eventcard";
 import { useUser } from "../../lib/hooks";
 import { useState, useEffect } from "react";
@@ -40,6 +41,12 @@ const AdminHome = () => {
     <Layout>
       <h1>Admin Dashboard</h1>
 
+      <div className="admin-buttons">
+        <button onClick={() => Router.push("/admin-dashboard/add-event")}>
+          Add Event
+        </button>
+      </div>
+
       <div className="search-and-filter">
         <input
           type="text"
@@ -73,6 +80,26 @@ const AdminHome = () => {
         .search-bar {
           margin-bottom: 1rem;
         }
+        .admin-buttons {
+          display: flex;
+          justify-content: flex-end;
+          margin-bottom: 1rem;
+        }
+        .admin-buttons button {
+          margin-right: 1rem;
+        }
+        .admin-buttons button:last-child {
+          margin-right: 0;
+        }
+        button {
+          padding: 0.5rem 1rem;
+          font-size: 1.2rem;
+          background-color: #333;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
         input {
           width: 100%;
           padding: 0.5rem;
@@ -89,6 +116,11 @@ const AdminHome = () => {
         @media (max-width: 600px) {
           h1 {
             font-size: 1.8rem;
+          }
+          .admin-buttons button {
+            width: 100%;
+            margin-bottom: 1rem;
+            min-width: 200px;
           }
         }
       `}</style>

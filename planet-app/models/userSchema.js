@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 
 const registeredEventSchema = new mongoose.Schema({
   event: { type: mongoose.Schema.Types.ObjectId, ref: "Event" },
-  status: { type: String, required: true },
 });
 
 const userCartSchema = new mongoose.Schema({
