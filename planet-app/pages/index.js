@@ -19,8 +19,6 @@ const Home = () => {
   useEffect(() => {
     const updatedList = user && user.role == "admin" 
       ? events.filter(e => {
-        console.log(`Event Org: ${e.eventOrg}, User: ${user.username}`);
-        console.log(e.eventOrg == user.username);
         return e.eventOrg == user.username;
       })
       : events;
