@@ -1,5 +1,6 @@
 [
   {
+    "_id": "507f1f77bcf86cd799439011",
     "createdAt": "2023-12-09T09:00:00.000Z",
     "eventName": "Midnight Hike",
     "eventDate": "2023-12-20T00:00:00.000Z",
@@ -13,6 +14,7 @@
     "eventImgUrl": "/images/event3.jpeg"
   },
   {
+    "_id": "507f1f77bcf86cd799439012",
     "createdAt": "2023-12-09T08:00:00.000Z",
     "eventName": "Sunrise Hike",
     "eventDate": "2023-12-15T00:00:00.000Z",
@@ -26,12 +28,13 @@
     "eventImgUrl": "/images/event1.jpeg"
   },
   {
+    "_id": "507f1f77bcf86cd799439013",
     "createdAt": "2023-12-09T08:30:00.000Z",
     "eventName": "Sunset Hike",
     "eventDate": "2023-12-18T00:00:00.000Z",
     "eventTime": "10:00",
     "eventLocation": "Dallas, TX",
-    "eventStatus": "pending",
+    "eventStatus": "cancelled",
     "maxAttendees": 70,
     "eventOrg": "Organization Y",
     "eventDescription": "Exploring Event 2",
@@ -39,6 +42,7 @@
     "eventImgUrl": "/images/event3.jpeg"
   },
   {
+    "_id": "507f1f77bcf86cd799439014",
     "createdAt": "2023-12-09T09:30:00.000Z",
     "eventName": "Evening Hike",
     "eventDate": "2023-12-22T00:00:00.000Z",
@@ -52,10 +56,25 @@
     "eventImgUrl": "/images/event4.jpeg"
   },
   {
+    "_id": "507f1f77bcf86cd799439015",
     "createdAt": "2023-12-09T10:00:00.000Z",
     "eventName": "Afternoon Hike",
     "eventDate": "2023-12-25T00:00:00.000Z",
     "eventTime": "18:00",
+    "eventLocation": "Dallas, TX",
+    "eventStatus": "confirmed",
+    "maxAttendees": 90,
+    "eventOrg": "Organization Y",
+    "eventDescription": "Exploring Event 5",
+    "eventPrice": 90,
+    "eventImgUrl": "/images/event5.jpeg"
+  },
+  {
+    "_id": "507f1f77bcf86cd799439016",
+    "createdAt": "2023-12-09T10:00:00.000Z",
+    "eventName": "Mid Day Hike",
+    "eventDate": "2023-12-12T00:00:00.000Z",
+    "eventTime": "12:00",
     "eventLocation": "Dallas, TX",
     "eventStatus": "confirmed",
     "maxAttendees": 90,

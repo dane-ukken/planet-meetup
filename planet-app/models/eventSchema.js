@@ -21,6 +21,4 @@ const eventSchema = new mongoose.Schema(
   { _id: true }
 );
 
-const wplA4Db = mongoose.connection.useDb("wpl-a4-db");
-
-export default wplA4Db.models.Event || wplA4Db.model("Event", eventSchema);
+export default eventSchema;

@@ -10,15 +10,26 @@ export default async function user(req, res) {
       return res.status(200).json({ user });
     }
 
-    const { username, email, phone, address, role, createdAt } = user || {};
+    const {
+      username,
+      email,
+      phone,
+      address,
+      role,
+      createdAt,
+      cart,
+      registeredEvents,
+    } = user || {};
     res.status(200).json({
       user: {
+        createdAt,
         username,
         email,
         phone,
         address,
         role,
-        createdAt,
+        cart,
+        registeredEvents,
       },
     });
   } catch (error) {

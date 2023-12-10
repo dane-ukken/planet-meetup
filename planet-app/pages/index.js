@@ -6,6 +6,8 @@ import Router from "next/router";
 const Home = () => {
   const user = useUser();
 
+  console.log("user", user);
+
   if (user) {
     Router.push(user.role == "admin" ? "/admin-dashboard" : "/events");
     return;

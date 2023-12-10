@@ -3,13 +3,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchEvents = createAsyncThunk("events/fetchEvents", async () => {
   const response = await fetch("/api/events");
   const events = await response.json();
-  const confirmedEvents = events.filter(
-    (event) => event.eventStatus === "confirmed"
-  );
-  const sortedEvents = confirmedEvents.sort((a, b) => {
-    return new Date(a.eventDate) - new Date(b.eventDate);
-  });
-  return sortedEvents;
+  // const confirmedEvents = events.filter(
+  //   (event) => event.eventStatus === "confirmed"
+  // );
+  // const sortedEvents = confirmedEvents.sort((a, b) => {
+  //   return new Date(a.eventDate) - new Date(b.eventDate);
+  // });
+  return events;
 });
 
 export const eventSlice = createSlice({

@@ -1,6 +1,5 @@
 import dbConnect from "./db";
-import Event from "../models/event";
-import User from "../models/user";
+import { Event, User } from "../models/dbModels";
 import eventData from "../mock/event-data.json";
 import userData from "../mock/user-data.json";
 

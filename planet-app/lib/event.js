@@ -1,5 +1,5 @@
 import dbConnect from "./db";
-import Event from "../models/event";
+import { Event } from "../models/dbModels";
 
 export async function createEvent({
   createdAt,

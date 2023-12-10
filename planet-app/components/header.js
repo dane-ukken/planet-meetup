@@ -73,6 +73,13 @@ const Header = () => {
             </li>
             {user ? (
               <>
+                {user.role === "user" && (
+                  <li>
+                    <Link href="/user/myevents" legacyBehavior>
+                      <a>My Events</a>
+                    </Link>
+                  </li>
+                )}
                 <li>
                   <Link href="/profile" legacyBehavior>
                     <a>Profile</a>

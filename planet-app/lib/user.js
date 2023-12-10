@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import User from "../models/user";
+import { User } from "../models/dbModels";
 import dbConnect from "./db";
 
 export async function createUser({
@@ -8,7 +8,7 @@ export async function createUser({
   phone,
   address,
   password,
-  role
+  role,
 }) {
   await dbConnect();
 
@@ -36,10 +36,10 @@ export async function createUser({
     if (err.code === 11000) {
       const field = Object.keys(err.keyValue)[0];
       console.log(`Duplicate ${field} error: `, err);
-      reject(new Error(`${field} already exists`));
+      throw new Error(`${field} already exists`);
     } else {
       console.log("Error creating user:", err);
-      reject(err);
+      throw err;
     }
   }
 }
@@ -47,8 +47,15 @@ export async function createUser({
 export async function findUser({ username }) {
   await dbConnect();
   return User.findOne({ username: username })
+    .populate({
+      path: "cart.event",
+    })
+    .populate({
+      path: "registeredEvents.event",
+    })
     .then((user) => {
       console.log(`found user`);
+      console.log(user);
       return user;
     })
     .catch((err) => {

@@ -1,5 +1,14 @@
 import mongoose from "mongoose";
 
+const registeredEventSchema = new mongoose.Schema({
+  event: { type: mongoose.Schema.Types.ObjectId, ref: "Event" },
+  status: { type: String, required: true },
+});
+
+const userCartSchema = new mongoose.Schema({
+  event: { type: mongoose.Schema.Types.ObjectId, ref: "Event" },
+});
+
 const userSchema = new mongoose.Schema(
   {
     _id: {
@@ -12,14 +21,12 @@ const userSchema = new mongoose.Schema(
     phone: { type: Number, required: true },
     address: { type: String, required: true },
     role: { type: String, required: true },
-    cart: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
-    registered_events: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
+    cart: [userCartSchema],
+    registeredEvents: [registeredEventSchema],
     hash: { type: String, required: true },
     salt: { type: String, required: true },
   },
   { _id: true }
 );
 
-const wplA4Db = mongoose.connection.useDb("wpl-a4-db");
-
-export default wplA4Db.models.User || wplA4Db.model("User", userSchema);
+export default userSchema;
