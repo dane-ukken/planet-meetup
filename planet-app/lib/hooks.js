@@ -12,9 +12,13 @@ export function useUser({ redirectTo, redirectIfFound } = {}) {
   }, [dispatch]);
 
   useEffect(() => {
-    if ((!redirectTo || loading) || error) return;
+    if (!redirectTo || loading || error) return;
+
     const hasUser = Boolean(user);
-    if ((redirectTo && !redirectIfFound && !hasUser) || (redirectIfFound && hasUser)) {
+    
+    if (hasUser && redirectTo === "/") {
+      Router.push(user.role === "admin" ? "/admin-dashboard" : "/events");
+    } else if ((redirectIfFound && hasUser) || (!redirectIfFound && !hasUser)) {
       Router.push(redirectTo);
     }
   }, [redirectTo, redirectIfFound, user, loading, error]);

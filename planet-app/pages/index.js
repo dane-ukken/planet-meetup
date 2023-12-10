@@ -2,12 +2,19 @@ import { useUser } from "../lib/hooks";
 import Layout from "../components/layout";
 import Landing from "../components/landing";
 import EventCard from "../components/eventcard";
+import Router from "next/router";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEvents } from '../store/features/events/eventSlice';
 
 const Home = () => {
   const user = useUser();
+  
+//   if (user) {
+//     Router.push(user.role == "admin" ? "/admin-dashboard" : "/events");
+//     return;
+//   }
+  
   const { events, loading, error } = useSelector((state) => state.events);
   const dispatch = useDispatch();
   const [eventList, setEventList] = useState([]);
