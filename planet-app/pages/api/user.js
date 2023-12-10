@@ -4,7 +4,8 @@ import { findUser } from "../../lib/user";
 export default async function user(req, res) {
   try {
     const session = await getLoginSession(req);
-    const user = (session && (await findUser(session._doc))) ?? null;
+    const user =
+      (session && (await findUser({ username: session.username }))) ?? null;
 
     if (!user) {
       return res.status(200).json({ user });
