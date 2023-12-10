@@ -51,7 +51,7 @@ const EventDetailsEditable = () => {
   if (error) return <p>Error: {error}</p>;
 
   const handleSaveClick = (id) => {
-    // await fetch(`/events/${id}/`) method PUT;
+    // await fetch(`/events/${id}`) method PUT;
     // router.push("/events/${id}");
   };
 

@@ -27,6 +27,14 @@ const EventDetails = () => {
     return null;
   }
 
+  const isRegistered =
+    user.registeredEvents.length > 0
+      ? user.registeredEvents.find((e) => e.event._id === id)
+      : false;
+
+  const inCart =
+    user.cart.length > 0 ? user.cart.find((e) => e._id === id) : false;
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
@@ -39,12 +47,24 @@ const EventDetails = () => {
   };
 
   const handleDeleteClick = async (id) => {
-    // await fetch(`/events/${id}/delete`);
+    // await fetch(`/events/${id}`); method: DELETE
     // router.push("/admin-dashboard");
   };
 
   const handleViewAttendeesClick = (id) => {
     router.push(`/events/${id}/attendees`);
+  };
+
+  const handleAddToCartClick = async (id) => {
+    // await fetch(`/add-to-cart`); method: POST body: { userId: user._id, eventId: event._id }
+  };
+
+  const handleRemoveFromCartClick = async (id) => {
+    // await fetch(`/remove-from-cart`); method: POST body: { userId: user._id, eventId: event._id }
+  };
+
+  const handleUnRegisterClick = async (id) => {
+    // await fetch(`/events/unregister`); method: POST body: { userId: user._id, eventId: event._id }
   };
 
   return (
@@ -98,7 +118,19 @@ const EventDetails = () => {
 
       {user.role === "user" && (
         <div className="user-buttons">
-          <button>Add to Cart</button>
+          {isRegistered ? (
+            <button onClick={() => handleUnRegisterClick(event._id)}>
+              Unregister
+            </button>
+          ) : inCart ? (
+            <button onClick={() => handleRemoveFromCartClick(event._id)}>
+              Remove from Cart
+            </button>
+          ) : (
+            <button onClick={() => handleAddToCartClick(event._id)}>
+              Add to Cart
+            </button>
+          )}
         </div>
       )}
 
