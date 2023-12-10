@@ -13,38 +13,37 @@ export async function createEvent({
   eventOrg,
   eventDescription,
 }) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      await dbConnect();
+  try {
+    await dbConnect();
 
-      const newEvent = new Event({
-        createdAt: Date.now(),
-        eventName: eventName,
-        eventDate: eventDate,
-        eventTime: eventTime,
-        eventLocation: eventLocation,
-        eventStatus: eventStatus,
-        maxAttendees: maxAttendees,
-        eventPrice: eventPrice,
-        eventImgUrl: eventImgUrl,
-        eventOrg: eventOrg,
-        eventDescription: eventDescription,
-      });
+    const newEvent = new Event({
+      createdAt: Date.now(),
+      eventName,
+      eventDate,
+      eventTime,
+      eventLocation,
+      eventStatus,
+      maxAttendees,
+      spotsLeft: maxAttendees,
+      eventPrice,
+      eventImgUrl,
+      eventOrg,
+      eventDescription,
+    });
 
-      const event = await newEvent.save();
-      console.log("Event created");
-      resolve({ eventName: event.eventName, createdAt: event.createdAt });
-    } catch (err) {
-      if (err.code === 11000) {
-        const field = Object.keys(err.keyValue)[0];
-        console.log(`Duplicate ${field} error: `, err);
-        reject(new Error(`${field} already exists`));
-      } else {
-        console.log("Error creating event:", err);
-        reject(err);
-      }
+    const event = await newEvent.save();
+    console.log("Event created");
+    return { eventName: event.eventName, createdAt: event.createdAt };
+  } catch (err) {
+    if (err.code === 11000) {
+      const field = Object.keys(err.keyValue)[0];
+      console.log(`Duplicate ${field} error: `, err);
+      throw new Error(`${field} already exists`);
+    } else {
+      console.log("Error creating event:", err);
+      throw err;
     }
-  });
+  }
 }
 
 export async function getEvents() {

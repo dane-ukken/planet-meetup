@@ -34,12 +34,13 @@ const Card = ({
               {formatDate(date)} at {formatTime(time)}
             </p>
             {location && <p className="card-location">{location}</p>}
-            {spotsLeft && (
-              <p className="card-spotsLeft">{formatSpotsLeftText(spotsLeft)}</p>
-            )}
+            <p className="card-spotsLeft">{formatSpotsLeftText(spotsLeft)}</p>
           </div>
           {iconName && (
-            <div className="card-action">
+            <div
+              className="card-action"
+              style={{ visibility: !spotsLeft ? "hidden" : "" }}
+            >
               <p>{price}</p>
               <button onClick={onIconClick}>
                 <span className="material-icons">{iconName}</span>

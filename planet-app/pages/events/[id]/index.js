@@ -116,7 +116,10 @@ const EventDetails = () => {
       </p>
 
       {user.role === "user" && (
-        <div className="user-buttons">
+        <div
+          className="user-buttons"
+          style={{ visibility: !event.spotsLeft ? "hidden" : "" }}
+        >
           {isRegistered ? (
             <button onClick={handleUnRegisterClick}>Unregister</button>
           ) : inCart ? (

@@ -20,6 +20,7 @@ const EventDetailsEditable = () => {
   const [eventPrice, setEventPrice] = useState("");
   const [eventStatus, setEventStatus] = useState("");
   const [maxAttendees, setMaxAttendees] = useState("");
+  const [eventImgUrl, setEventImgUrl] = useState("");
 
   useEffect(() => {
     if (events && events.length > 0) return;
@@ -40,6 +41,7 @@ const EventDetailsEditable = () => {
       setEventPrice(event.eventPrice);
       setEventStatus(event.eventStatus);
       setMaxAttendees(event.maxAttendees);
+      setEventImgUrl(event.eventImgUrl);
     }
   }, [events, id]);
 
@@ -69,6 +71,7 @@ const EventDetailsEditable = () => {
           type="text"
           value={eventName}
           onChange={(e) => setEventName(e.target.value)}
+          required
         />
       </div>
 
@@ -87,6 +90,7 @@ const EventDetailsEditable = () => {
           type="text"
           value={eventDate}
           onChange={(e) => setEventDate(e.target.value)}
+          required
         />
       </div>
 
@@ -96,6 +100,7 @@ const EventDetailsEditable = () => {
           type="text"
           value={eventTime}
           onChange={(e) => setEventTime(e.target.value)}
+          required
         />
       </div>
 
@@ -105,6 +110,7 @@ const EventDetailsEditable = () => {
           type="text"
           value={eventLocation}
           onChange={(e) => setEventLocation(e.target.value)}
+          required
         />
       </div>
 
@@ -114,6 +120,7 @@ const EventDetailsEditable = () => {
           type="number"
           value={eventPrice}
           onChange={(e) => setEventPrice(e.target.value)}
+          required
         />
       </div>
 
@@ -134,6 +141,17 @@ const EventDetailsEditable = () => {
           type="number"
           value={maxAttendees}
           onChange={(e) => setMaxAttendees(e.target.value)}
+          required
+        />
+      </div>
+
+      <div className="edit-field">
+        <label htmlFor="eventImgUrl">Image URL</label>
+        <input
+          type="text"
+          value={eventImgUrl}
+          onChange={(e) => setEventImgUrl(e.target.value)}
+          required
         />
       </div>
 

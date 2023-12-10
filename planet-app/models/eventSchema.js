@@ -7,7 +7,7 @@ const eventSchema = new mongoose.Schema(
       default: () => new mongoose.Types.ObjectId().toString(),
     },
     createdAt: { type: Date, required: true },
-    eventName: { type: String, required: true },
+    eventName: { type: String, required: true, unique: true },
     eventDate: { type: Date, required: true },
     eventTime: { type: String, required: true },
     eventLocation: { type: String, required: true },
