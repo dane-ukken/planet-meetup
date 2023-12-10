@@ -118,8 +118,7 @@ const Form = ({
                 type="checkbox"
                 name="role"
                 value={formFields.role}
-                onChange={handleChange}
-                required
+                onChange={handleChange}         
               />
               <span style={{ marginLeft: "1%" }}> Sign up as organizer</span>
             </div>

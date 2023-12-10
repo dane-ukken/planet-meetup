@@ -2,64 +2,29 @@ import { useUser } from "../lib/hooks";
 import Layout from "../components/layout";
 import Landing from "../components/landing";
 import EventCard from "../components/eventcard";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchEvents } from '../store/features/events/eventSlice';
 
 const Home = () => {
   const user = useUser();
-  const list = [
-    {
-      title: "Orange",
-      img: "/images/xmas.jpeg",
-      price: "$5.50",
-    },
-    {
-      title: "Tangerine",
-      img: "/images/xmas.jpeg",
-      price: "$3.00",
-    },
-    {
-      title: "Raspberry",
-      img: "/images/xmas.jpeg",
-      price: "$10.00",
-    },
-    {
-      title: "Lemon",
-      img: "/images/xmas.jpeg",
-      price: "$5.30",
-    },
-    {
-      title: "Avocado",
-      img: "/images/xmas.jpeg",
-      price: "$15.70",
-    },
-    {
-      title: "Lemon 2",
-      img: "/images/xmas.jpeg",
-      price: "$8.00",
-    },
-    {
-      title: "Banana",
-      img: "/images/xmas.jpeg",
-      price: "$7.50",
-    },
-    {
-      title: "Watermelon",
-      img: "/images/xmas.jpeg",
-      price: "$12.20",
-    },
-  ];
+  const { events, loading, error } = useSelector((state) => state.events);
+  const dispatch = useDispatch();
+  const [eventList, setEventList] = useState([]);
 
-  const admin_list = [
-    {
-      title: "Orange",
-      img: "/images/xmas.jpeg",
-      price: "$5.50",
-    },
-    {
-      title: "Tangerine",
-      img: "/images/xmas.jpeg",
-      price: "$3.00",
-    },
-  ];
+  useEffect(() => {
+    dispatch(fetchEvents());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const updatedList = user && user.role == "admin" 
+      ? events.filter(e => {
+        return e.eventOrg == user.username;
+      })
+      : events;
+    console.log(updatedList);
+    setEventList(updatedList);
+  }, [events, user]);
 
   return (
     <Layout>
@@ -69,7 +34,7 @@ const Home = () => {
 
           <p>You are signed in.</p>
           <EventCard
-            itemList={user.role == "admin" ? admin_list : list}
+            itemList={eventList}
           ></EventCard>
         </>
       ) : (

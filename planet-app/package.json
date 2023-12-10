@@ -10,8 +10,11 @@
   "dependencies": {
     "@hapi/iron": "6.0.0",
     "@nextui-org/react": "^2.2.9",
+    "@reduxjs/toolkit": "^2.0.1",
     "cookie": "0.5.0",
     "docker": "^1.0.0",
+    "fs": "^0.0.1-security",
+    "fs.promises": "^0.1.2",
     "mongoose": "^8.0.1",
     "next": "latest",
     "next-connect": "0.8.1",
@@ -19,6 +22,9 @@
     "passport-local": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^9.0.2",
+    "redux": "^5.0.0",
+    "redux-thunk": "^3.1.0",
     "swr": "^2.0.0"
   }
 }

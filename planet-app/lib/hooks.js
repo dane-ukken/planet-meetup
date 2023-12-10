@@ -1,31 +1,23 @@
 import { useEffect } from "react";
 import Router from "next/router";
-import useSWR from "swr";
-
-const fetcher = (url) =>
-  fetch(url)
-    .then((r) => r.json())
-    .then((data) => {
-      return { user: data?.user || null };
-    });
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUser } from '../store/features/user/userSlice';
 
 export function useUser({ redirectTo, redirectIfFound } = {}) {
-  const { data, error } = useSWR("/api/user", fetcher);
-  const user = data?.user;
-  const finished = Boolean(data);
-  const hasUser = Boolean(user);
+  const dispatch = useDispatch();
+  const { user, loading, error } = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (!redirectTo || !finished) return;
-    if (
-      // If redirectTo is set, redirect if the user was not found.
-      (redirectTo && !redirectIfFound && !hasUser) ||
-      // If redirectIfFound is also set, redirect if the user was found
-      (redirectIfFound && hasUser)
-    ) {
+    dispatch(fetchUser());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if ((!redirectTo || loading) || error) return;
+    const hasUser = Boolean(user);
+    if ((redirectTo && !redirectIfFound && !hasUser) || (redirectIfFound && hasUser)) {
       Router.push(redirectTo);
     }
-  }, [redirectTo, redirectIfFound, finished, hasUser]);
+  }, [redirectTo, redirectIfFound, user, loading, error]);
 
-  return error ? null : user;
+  return user;
 }
