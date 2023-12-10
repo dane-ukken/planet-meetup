@@ -37,8 +37,6 @@ export default async function getEventByIdHandler(req, res) {
         return res.status(404).json({ message: "Event not found" });
       }
 
-      await deleteEvent(id);
-
       res.status(200).json({ message: "Event deleted successfully" });
     } catch (error) {
       console.error(error);
