@@ -8,6 +8,8 @@ import { fetchEvents } from "../../store/features/events/eventSlice";
 const AdminHome = () => {
   const user = useUser({ redirectTo: "/" });
   const [searchTerm, setSearchTerm] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const { events, loading, error } = useSelector((state) => state.events);
   const dispatch = useDispatch();
 
@@ -21,22 +23,41 @@ const AdminHome = () => {
 
   const adminEvents = events.filter((e) => e.eventOrg == user.username);
 
-  const filteredEvents = searchTerm
-    ? adminEvents.filter((event) =>
-        event.eventName.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    : adminEvents;
+  const filteredEvents = adminEvents
+    .filter((event) => {
+      const eventDate = new Date(event.eventDate);
+      const start = startDate ? new Date(startDate) : new Date("1970-01-01");
+      const end = endDate ? new Date(endDate) : new Date("2999-12-31");
+      return eventDate >= start && eventDate <= end;
+    })
+    .filter((event) =>
+      searchTerm
+        ? event.eventName.toLowerCase().includes(searchTerm.toLowerCase())
+        : true
+    );
 
   return (
     <Layout>
       <h1>Admin Dashboard</h1>
 
-      <div className="search-bar">
+      <div className="search-and-filter">
         <input
           type="text"
           placeholder="Search events..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <input
+          type="date"
+          placeholder="Start date"
+          value={startDate}
+          onChange={(e) => setStartDate(e.target.value)}
+        />
+        <input
+          type="date"
+          placeholder="End date"
+          value={endDate}
+          onChange={(e) => setEndDate(e.target.value)}
         />
       </div>
 
@@ -58,6 +79,11 @@ const AdminHome = () => {
           margin-bottom: 1rem;
           border: 1px solid #ddd;
           border-radius: 5px;
+        }
+        .search-and-filter {
+          display: flex;
+          gap: 1rem;
+          margin-bottom: 1rem;
         }
 
         @media (max-width: 600px) {
