@@ -1,4 +1,4 @@
-import { getEventById } from "../../../lib/event"; // Adjust the import path as necessary
+import { getEventById } from "../../../lib/event";
 
 export default async function getEventByIdHandler(req, res) {
   const {

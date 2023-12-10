@@ -1,13 +1,14 @@
 import React from "react";
 import Link from "next/link";
 import "material-icons/iconfont/material-icons.css";
-import { formatDate, formatTime } from "../lib/common";
+import { formatDate, formatSpotsLeftText, formatTime } from "../lib/common";
 
 const Card = ({
   title,
   date,
   time,
   location,
+  spotsLeft,
   imageUrl,
   price,
   iconName,
@@ -29,6 +30,9 @@ const Card = ({
               {formatDate(date)} at {formatTime(time)}
             </p>
             {location && <p className="card-location">{location}</p>}
+            {spotsLeft && (
+              <p className="card-spotsLeft">{formatSpotsLeftText(spotsLeft)}</p>
+            )}
           </div>
           {iconName && (
             <div className="card-action">
@@ -64,6 +68,11 @@ const Card = ({
         }
         .card-location {
           font-size: 0.8rem;
+        }
+        .card-spotsLeft {
+          margin-top: 0.5rem;
+          font-size: 0.8rem;
+          margin-bottom: 0;
         }
         .card-image img {
           width: 100%;

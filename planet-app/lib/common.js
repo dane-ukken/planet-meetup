@@ -14,3 +14,12 @@ export const formatTime = (timeString) => {
   const hours12 = hours % 12 || 12;
   return `${hours12}:${minutes.toString().padStart(2, "0")} ${period}`;
 };
+
+export const formatSpotsLeftText = (spotsLeft) => {
+  const spotsLeftText = spotsLeft > 1 ? "spots" : "spot";
+  if (spotsLeft === 0) {
+    return "Sold out";
+  } else {
+    return `${spotsLeft} ${spotsLeftText} left`;
+  }
+};

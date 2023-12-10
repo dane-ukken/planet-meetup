@@ -144,6 +144,31 @@ const Header = () => {
           margin-top: 0;
           // border: 2px solid red;
         }
+        @media (max-width: 600px) {
+          h1 {
+            font-size: 1.8rem;
+            margin: 0;
+          }
+          nav {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          }
+          ul {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0;
+          }
+          li {
+            margin: 5px 0;
+            display: flex;
+            justify-content: center;
+          }
+          li:first-child {
+            margin-left: unset;
+          }
+        }
       `}</style>
     </>
   );

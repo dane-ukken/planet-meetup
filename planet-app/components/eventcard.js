@@ -20,6 +20,7 @@ const EventCard = ({ itemList }) => {
           location={item.eventLocation}
           imageUrl={item.eventImgUrl}
           price={`$${item.eventPrice}`}
+          spotsLeft={item.spotsLeft}
           iconName="add"
           onIconClick={(e) => {
             e.stopPropagation();
