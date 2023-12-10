@@ -27,7 +27,10 @@ const MyEvents = () => {
       searchTerm
         ? event.eventName.toLowerCase().includes(searchTerm.toLowerCase())
         : true
-    );
+    )
+    .sort((a, b) => {
+      return new Date(a.eventDate) - new Date(b.eventDate);
+    });
 
   return (
     <Layout>

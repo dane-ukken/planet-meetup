@@ -6,10 +6,10 @@ export const fetchEvents = createAsyncThunk("events/fetchEvents", async () => {
   const confirmedEvents = events.filter(
     (event) => event.eventStatus === "confirmed"
   );
-  // const sortedEvents = confirmedEvents.sort((a, b) => {
-  //   return new Date(a.eventDate) - new Date(b.eventDate);
-  // });
-  return confirmedEvents;
+  const sortedEvents = confirmedEvents.sort((a, b) => {
+    return new Date(a.eventDate) - new Date(b.eventDate);
+  });
+  return sortedEvents;
 });
 
 export const eventSlice = createSlice({
