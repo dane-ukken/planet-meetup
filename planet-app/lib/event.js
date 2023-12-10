@@ -79,6 +79,7 @@ export async function getEventById(id) {
 export async function updateEventById(id, eventData) {
   try {
     await dbConnect();
+    console.log(eventData);
     const updatedEvent = await Event.findByIdAndUpdate(
       id,
       { $set: eventData },
