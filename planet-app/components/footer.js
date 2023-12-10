@@ -1,9 +1,7 @@
 import Link from "next/link";
 import { useUser } from "../lib/hooks";
-import Router from "next/router";
-import { useCallback, useEffect, useRef } from "react";
 import { Vina_Sans } from "next/font/google";
-const headfont = Vina_Sans({
+const vinaSans = Vina_Sans({
   subsets: ["latin"],
   display: "swap",
   weight: ["400"],
@@ -15,11 +13,11 @@ const Footer = () => {
   return (
     <>
       <footer>
-        <nav className={headfont.className}>
+        <nav className={vinaSans.className}>
           <ul>
             <li>
               <Link href="#top" legacyBehavior>
-                <a style={{ marginLeft: "20px" }}>Go To Top</a>
+                <a style={{ marginLeft: "20px" }}>Back To Top</a>
               </Link>
             </li>
           </ul>

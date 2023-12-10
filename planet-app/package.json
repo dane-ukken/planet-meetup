@@ -1,7 +1,7 @@
 {
-  "name": "wpl-a4-passport-local",
+  "name": "planet-app",
   "version": "1.0.0",
-  "description": "WPL assignment 4",
+  "description": "WPL Final Project",
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -15,6 +15,7 @@
     "docker": "^1.0.0",
     "fs": "^0.0.1-security",
     "fs.promises": "^0.1.2",
+    "material-icons": "^1.13.12",
     "mongoose": "^8.0.1",
     "next": "latest",
     "next-connect": "0.8.1",

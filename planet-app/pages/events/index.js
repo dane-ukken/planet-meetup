@@ -1,58 +1,28 @@
 import Layout from "../../components/layout";
 import EventCard from "../../components/eventcard";
 import { useUser } from "../../lib/hooks";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchEvents } from "../../store/features/events/eventSlice";
 
-const About = () => {
-  const user = useUser({ redirectTo: "/login" });
+const UserHome = () => {
+  const user = useUser({ redirectTo: "/" });
+  const { events, loading, error } = useSelector((state) => state.events);
+  const dispatch = useDispatch();
 
-  const list = [
-    {
-      title: "Orange",
-      img: "/images/xmas.jpeg",
-      price: "$5.50",
-    },
-    {
-      title: "Tangerine",
-      img: "/images/xmas.jpeg",
-      price: "$3.00",
-    },
-    {
-      title: "Raspberry",
-      img: "/images/xmas.jpeg",
-      price: "$10.00",
-    },
-    {
-      title: "Lemon",
-      img: "/images/xmas.jpeg",
-      price: "$5.30",
-    },
-    {
-      title: "Avocado",
-      img: "/images/xmas.jpeg",
-      price: "$15.70",
-    },
-    {
-      title: "Lemon 2",
-      img: "/images/xmas.jpeg",
-      price: "$8.00",
-    },
-    {
-      title: "Banana",
-      img: "/images/xmas.jpeg",
-      price: "$7.50",
-    },
-    {
-      title: "Watermelon",
-      img: "/images/xmas.jpeg",
-      price: "$12.20",
-    },
-  ];
+  useEffect(() => {
+    dispatch(fetchEvents());
+  }, [dispatch]);
+
+  if (!user || user.role !== "user") {
+    return null;
+  }
 
   return (
     <Layout>
-      <h1>Welcome, {user.username}!</h1>
+      <h1>Available Events</h1>
 
-      <EventCard itemList={list}></EventCard>
+      <EventCard itemList={events}></EventCard>
 
       <style jsx>{`
         h1 {
@@ -72,4 +42,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default UserHome;

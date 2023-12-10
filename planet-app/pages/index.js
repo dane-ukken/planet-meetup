@@ -1,54 +1,19 @@
 import { useUser } from "../lib/hooks";
 import Layout from "../components/layout";
 import Landing from "../components/landing";
-import EventCard from "../components/eventcard";
 import Router from "next/router";
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchEvents } from '../store/features/events/eventSlice';
 
 const Home = () => {
   const user = useUser();
-  
-//   if (user) {
-//     Router.push(user.role == "admin" ? "/admin-dashboard" : "/events");
-//     return;
-//   }
-  
-  const { events, loading, error } = useSelector((state) => state.events);
-  const dispatch = useDispatch();
-  const [eventList, setEventList] = useState([]);
 
-  useEffect(() => {
-    dispatch(fetchEvents());
-  }, [dispatch]);
-
-  useEffect(() => {
-    const updatedList = user && user.role == "admin" 
-      ? events.filter(e => {
-        return e.eventOrg == user.username;
-      })
-      : events;
-    console.log(updatedList);
-    setEventList(updatedList);
-  }, [events, user]);
+  if (user) {
+    Router.push(user.role == "admin" ? "/admin-dashboard" : "/events");
+    return;
+  }
 
   return (
     <Layout>
-      {user ? (
-        <>
-          <h1>Welcome, {user.username}!</h1>
-
-          <p>You are signed in.</p>
-          <EventCard
-            itemList={eventList}
-          ></EventCard>
-        </>
-      ) : (
-        <>
-          <Landing></Landing>
-        </>
-      )}
+      <Landing></Landing>
 
       <style jsx>{`
         html,

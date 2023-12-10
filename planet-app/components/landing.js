@@ -1,14 +1,25 @@
-import Head from "next/head";
-import Header from "./header";
 import Image from "next/image";
+import Router from "next/router";
 
-const imageDimension = 900;
+const imageDimension = 800;
 
 const Landing = () => (
-  <>
-    <main></main>
-    <h1>Your launchpad to great events.</h1>
-    <p>Sign in to proceed!</p>
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+    }}
+  >
+    <h1>Your Launchpad to Amazing Events.</h1>
+    <button
+      onClick={() => {
+        Router.push("/login");
+      }}
+    >
+      Start Exploring
+    </button>
     <div className="landing-image-container">
       <Image
         src="/images/earth-png-25612.png"
@@ -18,8 +29,9 @@ const Landing = () => (
         height={imageDimension}
         style={{
           marginTop: "2rem",
-          width: "120%",
+          width: "100%",
           height: "auto",
+          filter: "drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.3))",
         }}
       />
     </div>
@@ -54,13 +66,32 @@ const Landing = () => (
         color: grey;
         text-align: center;
       }
+      button {
+        background-color: #fff;
+        border: none;
+        border-radius: 0.25rem;
+        font-size: 1.25rem;
+        padding: 1rem 1rem;
+        margin: 2rem 0;
+        width: 40%;
+        cursor: pointer;
+      }
+
       .landing-image-container {
         display: flex;
         justify-content: center;
         align-items: center;
       }
+
+      @media (max-width: 600px) {
+        button {
+          width: 40%;
+          min-width: 120px;
+          font-size: 1rem;
+        }
+      }
     `}</style>
-  </>
+  </div>
 );
 
 export default Landing;

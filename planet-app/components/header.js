@@ -4,7 +4,7 @@ import Router from "next/router";
 import { useCallback, useEffect, useRef } from "react";
 import Head from "next/head";
 import { Vina_Sans } from "next/font/google";
-const headfont = Vina_Sans({
+const vinaSans = Vina_Sans({
   subsets: ["latin"],
   display: "swap",
   weight: ["400"],
@@ -59,8 +59,8 @@ const Header = () => {
         <title>Landing Page</title>
       </Head>
       <header>
-        <nav className={headfont.className}>
-          <h1 className="site-name">
+        <nav className={vinaSans.className}>
+          <h1 className={vinaSans.className}>
             <Link href="/" legacyBehavior>
               <a>planet</a>
             </Link>
@@ -103,7 +103,7 @@ const Header = () => {
           justify-content: space-between;
         }
         h1 {
-          text-shadow: 2px 2px 2px lightblue;
+          // text-shadow: 2px 2px 2px lightblue;
           font-size: 3em;
           margin: 0 0 0 2%;
           display: inline;

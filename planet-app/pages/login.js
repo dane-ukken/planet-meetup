@@ -6,7 +6,6 @@ import Form from "../components/form";
 
 const Login = () => {
   useUser({ redirectTo: "/", redirectIfFound: true });
-
   const [errorMsg, setErrorMsg] = useState("");
   const [loginSuccess, setLoginSuccess] = useState(false);
 

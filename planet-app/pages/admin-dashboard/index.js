@@ -1,25 +1,30 @@
 import Layout from "../../components/layout";
 import EventCard from "../../components/eventcard";
+import { useUser } from "../../lib/hooks";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchEvents } from "../../store/features/events/eventSlice";
 
-const About = () => {
-  const admin_list = [
-    {
-      title: "Orange",
-      img: "/images/xmas.jpeg",
-      price: "$5.50",
-    },
-    {
-      title: "Tangerine",
-      img: "/images/xmas.jpeg",
-      price: "$3.00",
-    },
-  ];
+const AdminHome = () => {
+  const user = useUser({ redirectTo: "/" });
+  const { events, loading, error } = useSelector((state) => state.events);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchEvents());
+  }, [dispatch]);
+
+  if (!user || user.role !== "admin") {
+    return;
+  }
+
+  const adminEvents = events.filter((e) => e.eventOrg == user.username);
 
   return (
     <Layout>
       <h1>Admin Dashboard</h1>
 
-      <EventCard itemList={admin_list}></EventCard>
+      <EventCard itemList={adminEvents}></EventCard>
 
       <style jsx>{`
         h1 {
@@ -39,4 +44,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default AdminHome;

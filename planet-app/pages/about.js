@@ -29,24 +29,6 @@ const About = () => {
       </ul>
 
       <style jsx>{`
-        .profile-field-main-container {
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          gap: 1.5rem; // Spacing between containers
-        }
-
-        .profile-field-container {
-          max-width: 600px;
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          border-bottom: 1px solid #eee; // Subtle separation
-          padding-bottom: 1rem;
-          margin-bottom: 1rem;
-        }
-
         h1 {
           font-size: 2.2rem;
           color: #333;

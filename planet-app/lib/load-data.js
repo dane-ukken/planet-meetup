@@ -1,16 +1,20 @@
 import dbConnect from "./db";
 import Event from "../models/event";
-import data from "./seed-data.json";
+import User from "../models/user";
+import eventData from "../mock/event-data.json";
+import userData from "../mock/user-data.json";
 
-export async function seedInitialData() {
+export async function saveMockDataToDB() {
   try {
     await dbConnect();
-    const jsonData = data;
-    //const jsonData = JSON.parse(initialData);
-    console.log(jsonData);
-    const events = await Event.insertMany(jsonData);
+
+    await Event.deleteMany({});
+    await User.deleteMany({});
+
+    const events = await Event.insertMany(eventData);
+    const users = await User.insertMany(userData);
+
     console.log("Initial data has been seeded.");
-    return events;
   } catch (error) {
     console.error("Error seeding initial data:", error);
   }
