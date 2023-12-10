@@ -60,7 +60,11 @@ const Header = () => {
       </Head>
       <header>
         <nav className={headfont.className}>
-          <h1 className="site-name">planet</h1>
+          <h1 className="site-name">
+            <Link href="/" legacyBehavior>
+              <a>planet</a>
+            </Link>
+          </h1>
           <ul>
             <li>
               <Link href="/" legacyBehavior>

@@ -16,31 +16,19 @@ const Footer = () => {
     <>
       <footer>
         <nav className={headfont.className}>
-          <h1 className="site-name">Footer</h1>
           <ul>
             <li>
-              <Link href="/" legacyBehavior>
-                <a>Home</a>
+              <Link href="#top" legacyBehavior>
+                <a style={{ marginLeft: "20px" }}>Go To Top</a>
               </Link>
             </li>
-            {user ? (
-              <>
-                <li>
-                  <Link href="/profile" legacyBehavior>
-                    <a>Profile</a>
-                  </Link>
-                </li>
-                <li>
-                  <a href="/api/logout">Logout</a>
-                </li>
-              </>
-            ) : (
-              <li>
-                <Link href="/about" legacyBehavior>
-                  <a>About</a>
-                </Link>
-              </li>
-            )}
+          </ul>
+          <ul>
+            <li>
+              <Link href="/about" legacyBehavior>
+                <a>About</a>
+              </Link>
+            </li>
           </ul>
         </nav>
       </footer>

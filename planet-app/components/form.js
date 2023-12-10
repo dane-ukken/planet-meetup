@@ -119,7 +119,6 @@ const Form = ({
                 name="role"
                 value={formFields.role}
                 onChange={handleChange}
-                required
               />
               <span style={{ marginLeft: "1%" }}> Sign up as organizer</span>
             </div>

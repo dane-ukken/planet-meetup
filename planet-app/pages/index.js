@@ -2,81 +2,19 @@ import { useUser } from "../lib/hooks";
 import Layout from "../components/layout";
 import Landing from "../components/landing";
 import EventCard from "../components/eventcard";
+import Router from "next/router";
 
 const Home = () => {
   const user = useUser();
-  const list = [
-    {
-      title: "Orange",
-      img: "/images/xmas.jpeg",
-      price: "$5.50",
-    },
-    {
-      title: "Tangerine",
-      img: "/images/xmas.jpeg",
-      price: "$3.00",
-    },
-    {
-      title: "Raspberry",
-      img: "/images/xmas.jpeg",
-      price: "$10.00",
-    },
-    {
-      title: "Lemon",
-      img: "/images/xmas.jpeg",
-      price: "$5.30",
-    },
-    {
-      title: "Avocado",
-      img: "/images/xmas.jpeg",
-      price: "$15.70",
-    },
-    {
-      title: "Lemon 2",
-      img: "/images/xmas.jpeg",
-      price: "$8.00",
-    },
-    {
-      title: "Banana",
-      img: "/images/xmas.jpeg",
-      price: "$7.50",
-    },
-    {
-      title: "Watermelon",
-      img: "/images/xmas.jpeg",
-      price: "$12.20",
-    },
-  ];
 
-  const admin_list = [
-    {
-      title: "Orange",
-      img: "/images/xmas.jpeg",
-      price: "$5.50",
-    },
-    {
-      title: "Tangerine",
-      img: "/images/xmas.jpeg",
-      price: "$3.00",
-    },
-  ];
+  if (user) {
+    Router.push(user.role == "admin" ? "/admin-dashboard" : "/events");
+    return;
+  }
 
   return (
     <Layout>
-      {user ? (
-        <>
-          <h1>Welcome, {user.username}!</h1>
-
-          <p>You are signed in.</p>
-          <EventCard
-            itemList={user.role == "admin" ? admin_list : list}
-          ></EventCard>
-        </>
-      ) : (
-        <>
-          <Landing></Landing>
-        </>
-      )}
+      <Landing></Landing>
 
       <style jsx>{`
         html,

@@ -2,17 +2,25 @@ import Head from "next/head";
 import Header from "./header";
 import Image from "next/image";
 
+const imageDimension = 900;
+
 const Landing = () => (
   <>
     <main></main>
     <h1>Your launchpad to great events.</h1>
-    <p>Sign in to proceed.</p>
+    <p>Sign in to proceed!</p>
     <div className="landing-image-container">
       <Image
         src="/images/earth-png-25612.png"
         alt="Earth Image"
-        width={500}
-        height={500}
+        sizes="100vw"
+        width={imageDimension}
+        height={imageDimension}
+        style={{
+          marginTop: "2rem",
+          width: "120%",
+          height: "auto",
+        }}
       />
     </div>
 
