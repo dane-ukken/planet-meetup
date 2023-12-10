@@ -3,42 +3,30 @@ import Layout from "../components/layout";
 import Landing from "../components/landing";
 import EventCard from "../components/eventcard";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchEvents } from '../store/features/events/eventSlice';
 
 const Home = () => {
   const user = useUser();
-  const [list, setList] = useState([]);
+  const { events, loading, error } = useSelector((state) => state.events);
+  const dispatch = useDispatch();
+  const [eventList, setEventList] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/events");
-        const data = await response.json();
-        console.log("Received events", data);
-        setList(data);
-      } catch (error) {
-        console.error("Error fetching seed data:", error);
-      }
-    };
+    dispatch(fetchEvents());
+  }, [dispatch]);
 
-    fetchData();
-  }, []);
-
-
-  
-  const admin_list = [
-    {
-      title: "Event1",
-      img: "/images/xmas.jpeg",
-      price: "$5.50",
-    },
-    {
-      title: "Event2",
-      img: "/images/xmas.jpeg",
-      price: "$3.00",
-    },
-  ];
-
-  console.log(list);
+  useEffect(() => {
+    const updatedList = user && user.role == "admin" 
+      ? events.filter(e => {
+        console.log(`Event Org: ${e.eventOrg}, User: ${user.username}`);
+        console.log(e.eventOrg == user.username);
+        return e.eventOrg == user.username;
+      })
+      : events;
+    console.log(updatedList);
+    setEventList(updatedList);
+  }, [events, user]);
 
   return (
     <Layout>
@@ -48,7 +36,7 @@ const Home = () => {
 
           <p>You are signed in.</p>
           <EventCard
-            itemList={user.role == "admin" ? admin_list : list}
+            itemList={eventList}
           ></EventCard>
         </>
       ) : (

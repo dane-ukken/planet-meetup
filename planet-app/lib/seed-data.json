@@ -7,7 +7,7 @@
     "eventLocation": "Location A",
     "eventStatus": "confirmed",
     "maxAttendees": 50,
-    "eventOrg": "Organization X",
+    "eventOrg": "firstuser",
     "eventDescription": "Exploring Event 1",
     "eventPrice": 50,
     "eventImgUrl": "/images/event1.jpeg"
@@ -46,7 +46,7 @@
     "eventLocation": "Location A",
     "eventStatus": "cancelled",
     "maxAttendees": 60,
-    "eventOrg": "Organization X",
+    "eventOrg": "firstuser",
     "eventDescription": "Exploring Event 4",
     "eventPrice": 80,
     "eventImgUrl": "/images/event4.jpeg"
