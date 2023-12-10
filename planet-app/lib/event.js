@@ -75,3 +75,32 @@ export async function getEventById(id) {
       return null;
     });
 }
+
+export async function updateEventById(id, eventData) {
+  try {
+    await dbConnect();
+    console.log(eventData);
+    const updatedEvent = await Event.findByIdAndUpdate(
+      id,
+      { $set: eventData },
+      { new: true }
+    );
+    console.log("Event updated", updatedEvent._id);
+    return { eventName: updatedEvent.eventName };
+  } catch (err) {
+    console.log("Error updating event:", err);
+    throw err;
+  }
+}
+
+export async function deleteEventById(id) {
+  try {
+    await dbConnect();
+    const deletedEvent = await Event.deleteOne({ _id: id });
+    console.log("Event deleted", deletedEvent._id);
+    return { eventName: deletedEvent.eventName };
+  } catch (err) {
+    console.log("Error deleting event:", err);
+    throw err;
+  }
+}
