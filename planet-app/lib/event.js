@@ -120,3 +120,4 @@ export function findAttendees(users, eventId) {
 
   return attendees;
 }
+

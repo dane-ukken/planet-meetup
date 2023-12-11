@@ -2,11 +2,9 @@ import {
   getEventById,
   updateEventById,
   deleteEventById,
-  findAttendees,
 } from "../../../lib/event";
-import { getAllUsers } from "../../../lib/user";
 
-export async function getEventByIdHandler(req, res) {
+export default async function getEventByIdHandler(req, res) {
   const {
     query: { id },
     method,
@@ -46,21 +44,5 @@ export async function getEventByIdHandler(req, res) {
     }
   } else {
     res.status(405).json({ message: "Method Not Allowed" });
-  }
-}
-
-export async function attendeesHandler(req, res) {
-  try {
-    const users = await getAllUsers();
-
-    const eventId = req.query.id;
-
-    const attendees = findAttendees(users, eventId);
-    console.log(attendees);
-
-    res.status(200).json({ attendees });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
   }
 }
