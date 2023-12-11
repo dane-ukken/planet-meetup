@@ -93,10 +93,7 @@ const EventDetails = () => {
     <Layout>
       <div className="top-bar">
         <div style={{ margin: "0" }}>
-          <button
-            className="back-button"
-            onClick={() => router.push(`/events`)}
-          >
+          <button className="back-button" onClick={() => router.back()}>
             <span className="material-icons">arrow_back</span>
           </button>
         </div>

@@ -117,13 +117,24 @@ const AdminHome = () => {
           h1 {
             font-size: 1.8rem;
           }
+          .admin-buttons {
+            justify-content: center;
+          }
           .admin-buttons button {
-            width: 100%;
+            width: 80%;
             margin-bottom: 1rem;
             min-width: 200px;
           }
           .search-and-filter {
             flex-direction: column;
+            align-items: center;
+          }
+          .search-and-filter input {
+            margin-bottom: 0.5rem;
+          }
+          input {
+            width: 80%;
+            min-width: 300px;
           }
         }
       `}</style>

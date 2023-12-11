@@ -46,7 +46,7 @@ const Profile = () => {
           width: 100%;
           display: flex;
           flex-direction: column;
-          gap: 1.5rem; // Spacing between containers
+          gap: 1rem;
         }
 
         .profile-field-container {
@@ -55,16 +55,14 @@ const Profile = () => {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          border-bottom: 1px solid #eee; // Subtle separation
+          border-bottom: 1px solid #eee;
           padding-bottom: 1rem;
-          margin-bottom: 1rem;
         }
 
         h1 {
           font-size: 2.2rem;
           color: #333;
           font-weight: 600;
-          margin-bottom: 2rem;
         }
 
         h3 {

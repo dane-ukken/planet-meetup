@@ -86,6 +86,17 @@ const MyEvents = () => {
           h1 {
             font-size: 1.8rem;
           }
+          .search-and-filter {
+            flex-direction: column;
+            align-items: center;
+          }
+          .search-and-filter input {
+            margin-bottom: 0.5rem;
+          }
+          input {
+            width: 80%;
+            min-width: 300px;
+          }
         }
       `}</style>
     </Layout>

@@ -69,6 +69,28 @@ const Footer = () => {
           color: #fff;
           text-decoration: none;
         }
+        @media (max-width: 600px) {
+          h1 {
+            font-size: 1.8rem;
+            margin: 0;
+          }
+          nav {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          }
+          ul {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0.5rem 0;
+          }
+          li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
       `}</style>
     </>
   );
