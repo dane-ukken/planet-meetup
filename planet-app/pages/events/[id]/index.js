@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import {
-  fetchEvents,
-  fetchEventsAdmin,
-} from "../../../store/features/events/eventSlice";
+import { fetchEvents, fetchEventsAdmin } from "../../../store/features/events/eventSlice";
+import { addEventToCart } from "../../../store/features/user/userSlice";
 import { useUser } from "../../../lib/hooks";
 import Layout from "../../../components/layout";
 import {
@@ -23,84 +21,35 @@ const EventDetails = () => {
   useEffect(() => {
     if (events && events.length > 0) return;
 
-    if (!user) return;
-
-    if (user.role === "user") {
-      dispatch(fetchEvents());
-    } else {
-      dispatch(fetchEventsAdmin());
-    }
+    dispatch(fetchEvents());
   }, [dispatch]);
 
   if (!user) {
     return null;
   }
 
-  const isRegistered =
-    user.registeredEvents.length > 0
-      ? user.registeredEvents.find((e) => e.event._id === id)
-      : false;
-
-  const inCart =
-    user.cart.length > 0 ? user.cart.find((e) => e._id === id) : false;
-
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
   if (!events) return <p>No event details available.</p>;
 
-  if (!events.find((e) => e._id === id)) {
-    return <p>Event not found.</p>;
-  }
-
   const event = events.find((e) => e._id === id);
-  const isCancelled = event.eventStatus === "cancelled";
 
-  const handleEditClick = () => {
+  const handleEditClick = (id) => {
     router.push(`/events/${id}/edit`);
   };
 
-  const handleDeleteClick = async () => {
-    try {
-      const response = await fetch(`/api/events/${id}`, { method: "DELETE" });
-      if (response.status === 204) {
-        router.push("/admin-dashboard");
-      } else if (response.status === 400 || response.status === 404) {
-        const contentType = response.headers.get("content-type");
-        if (contentType && contentType.includes("application/json")) {
-          const responseJson = await response.json();
-          console.log(responseJson);
-          alert(responseJson.message);
-        } else {
-          console.log(
-            `Received ${response.status} status without JSON content.`
-          );
-        }
-      } else {
-        console.log(
-          "Failed to delete the event. Status code:",
-          response.status
-        );
-      }
-    } catch (error) {
-      console.error("Failed to delete the event:", error);
-    }
+  const handleDeleteClick = async (id) => {
+    // await fetch(`/events/${id}/delete`);
+    // router.push("/admin-dashboard");
   };
 
-  const handleViewAttendeesClick = () => {
+  const handleViewAttendeesClick = (id) => {
     router.push(`/events/${id}/attendees`);
   };
 
-  const handleAddToCartClick = async () => {
-    // await fetch(`/add-to-cart`); method: POST body: { userId: user._id, eventId: event._id }
-  };
-
-  const handleRemoveFromCartClick = async () => {
-    // await fetch(`/remove-from-cart`); method: POST body: { userId: user._id, eventId: event._id }
-  };
-
-  const handleUnRegisterClick = async () => {
-    // await fetch(`/events/unregister`); method: POST body: { userId: user._id, eventId: event._id }
+  const handleAddEventToCart = (id) => {
+    dispatch(addEventToCart(id));
   };
 
   return (
@@ -116,19 +65,21 @@ const EventDetails = () => {
         </div>
         {user.role === "admin" && (
           <div className="admin-buttons">
-            <button onClick={handleEditClick}>Edit Event</button>
-            <button onClick={handleDeleteClick}>Delete Event</button>
-            <button onClick={handleViewAttendeesClick}>View Attendees</button>
+            <button onClick={() => handleEditClick(event._id)}>
+              Edit Event
+            </button>
+            <button onClick={() => handleDeleteClick(event._id)}>
+              Delete Event
+            </button>
+            <button onClick={() => handleViewAttendeesClick(event._id)}>
+              View Attendees
+            </button>
           </div>
         )}
       </div>
 
       <h1>{event.eventName}</h1>
-
-      <div className="image-container">
-        <img src={event.eventImgUrl} alt={event.eventName} />
-        {isCancelled && <div className="cancelled-overlay">Cancelled</div>}
-      </div>
+      <img src={event.eventImgUrl} alt={event.eventName} />
 
       <p style={{ margin: "1rem 0" }} className="description">
         {event.eventDescription}
@@ -151,57 +102,16 @@ const EventDetails = () => {
       </p>
 
       {user.role === "user" && (
-        <div
-          className="user-buttons"
-          style={{ visibility: !event.spotsLeft ? "hidden" : "" }}
-        >
-          {isRegistered ? (
-            <button onClick={handleUnRegisterClick}>Unregister</button>
-          ) : inCart ? (
-            <button onClick={handleRemoveFromCartClick}>
-              Remove from Cart
-            </button>
-          ) : (
-            <button onClick={handleAddToCartClick}>Add to Cart</button>
-          )}
+        <div className="user-buttons">
+          <button onClick={() => handleAddEventToCart(event._id)}>Add to Cart</button>
         </div>
       )}
 
       <style jsx>{`
-        .image-container {
-          position: relative;
-          width: 100%;
-          height: 300px;
-        }
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-        .cancelled-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(
-            255,
-            0,
-            0,
-            0.6
-          ); // Semi-transparent red overlay
-          color: white;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-size: 1.5rem;
-          font-weight: bold;
-        }
         .top-bar {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
-          margin-bottom: 2rem;
         }
         .back-button {
           background-color: transparent;
@@ -212,8 +122,6 @@ const EventDetails = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 0.75rem 1rem;
-          margin: 0;
         }
         h1 {
           font-size: 2.2rem;
@@ -224,10 +132,10 @@ const EventDetails = () => {
         .admin-buttons {
           display: flex;
           justify-content: flex-end;
+          margin-bottom: 1rem;
         }
         .admin-buttons button {
           margin-right: 1rem;
-          padding: 0.75rem 1rem;
         }
         .user-buttons {
           display: flex;
@@ -245,9 +153,15 @@ const EventDetails = () => {
           font-size: 1.2rem;
           margin-bottom: 2rem;
         }
+        img {
+          width: 100%;
+          height: 300px;
+          object-fit: cover;
+          margin-bottom: 1rem;
+        }
         button {
           padding: 0.5rem 1rem;
-          font-size: 1rem;
+          font-size: 1.2rem;
           background-color: #333;
           color: #fff;
           border: none;
@@ -276,8 +190,9 @@ const EventDetails = () => {
           .top-bar {
             flex-direction: column;
           }
-          .image-container {
-            height: 200px;
+          img {
+            height: auto;
+            min-height: 100px;
           }
         }
       `}</style>

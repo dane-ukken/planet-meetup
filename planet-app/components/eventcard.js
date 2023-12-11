@@ -1,12 +1,17 @@
 import Card from "../components/card";
+import { addEventToCart } from "../store/features/user/userSlice";
+import { useDispatch } from 'react-redux';
 
 const EventCard = ({ itemList }) => {
+  const dispatch = useDispatch();
+
   if (itemList.length === 0) {
     return <p>No events available.</p>;
   }
 
   const handleAddToCart = (id) => {
     console.log(id + " added to cart.");
+    dispatch(addEventToCart(id));
   };
 
   return (

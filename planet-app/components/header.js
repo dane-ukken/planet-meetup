@@ -12,7 +12,7 @@ const vinaSans = Vina_Sans({
 
 const Header = () => {
   const user = useUser();
-
+  const isAdmin = user && user.role === "admin" ? true : false;
   const logoutTimer = useRef(null);
   const TIMER_1_MINUTE = 1000 * 60;
   const TIMER_1_HOUR = TIMER_1_MINUTE * 60;
@@ -73,7 +73,7 @@ const Header = () => {
             </li>
             {user ? (
               <>
-                {user.role === "user" && (
+                {!isAdmin && (
                   <li>
                     <Link href="/user/my-events" legacyBehavior>
                       <a>My Events</a>
@@ -85,6 +85,13 @@ const Header = () => {
                     <a>Profile</a>
                   </Link>
                 </li>
+                {!isAdmin && (
+                  <li>
+                    <Link href="/user/my-cart" legacyBehavior>
+                      <a>Cart</a>
+                    </Link>
+                  </li>
+                )}
                 <li>
                   <a href="/api/logout">Logout</a>
                 </li>
