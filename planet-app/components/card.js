@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import "material-icons/iconfont/material-icons.css";
 import { formatDate, formatSpotsLeftText, formatTime } from "../lib/common";
@@ -19,11 +19,14 @@ const Card = ({
   onClickLink,
 }) => {
   const user = useUser();
-  const isRegistered = user.registeredEvents.length > 0
-  ? user.registeredEvents.find((e) => e.event._id === id)
-  : false;
-  const inCart = user.cart.length > 0 ? user.cart.find((e) => e.event._id === id) : false;
-  const isHidden = isRegistered || inCart;
+  const isRegistered =
+    user.registeredEvents.length > 0
+      ? user.registeredEvents.find((e) => e.event._id === id)
+      : false;
+  const inCart =
+    user.cart.length > 0 ? user.cart.find((e) => e.event._id === id) : false;
+  const isAdmin = user.role === "admin";
+  const isHidden = isRegistered || inCart || isAdmin;
 
   return (
     <>
