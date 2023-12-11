@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { fetchEvents } from "../../../store/features/events/eventSlice";
+import {
+  fetchEvents,
+  fetchEventsAdmin,
+} from "../../../store/features/events/eventSlice";
 import { useUser } from "../../../lib/hooks";
 import Layout from "../../../components/layout";
 import {
@@ -20,7 +23,13 @@ const EventDetails = () => {
   useEffect(() => {
     if (events && events.length > 0) return;
 
-    dispatch(fetchEvents());
+    if (!user) return;
+
+    if (user.role === "user") {
+      dispatch(fetchEvents());
+    } else {
+      dispatch(fetchEventsAdmin());
+    }
   }, [dispatch]);
 
   if (!user) {
@@ -48,8 +57,30 @@ const EventDetails = () => {
   };
 
   const handleDeleteClick = async () => {
-    // await fetch(`/events/${id}`); method: DELETE
-    // router.push("/admin-dashboard");
+    try {
+      const response = await fetch(`/api/events/${id}`, { method: "DELETE" });
+      if (response.status === 204) {
+        router.push("/admin-dashboard");
+      } else if (response.status === 400 || response.status === 404) {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const responseJson = await response.json();
+          console.log(responseJson);
+          alert(responseJson.message);
+        } else {
+          console.log(
+            `Received ${response.status} status without JSON content.`
+          );
+        }
+      } else {
+        console.log(
+          "Failed to delete the event. Status code:",
+          response.status
+        );
+      }
+    } catch (error) {
+      console.error("Failed to delete the event:", error);
+    }
   };
 
   const handleViewAttendeesClick = () => {
@@ -241,9 +272,8 @@ const EventDetails = () => {
           .top-bar {
             flex-direction: column;
           }
-          img {
-            height: auto;
-            min-height: 100px;
+          .image-container {
+            height: 200px;
           }
         }
       `}</style>

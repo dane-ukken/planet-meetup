@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { fetchEvents } from "../../../store/features/events/eventSlice";
+import { fetchEventsAdmin } from "../../../store/features/events/eventSlice";
 import { useUser } from "../../../lib/hooks";
 import Layout from "../../../components/layout";
 import { formatDate, formatTime } from "../../../lib/common";
@@ -16,7 +16,7 @@ const EventAttendees = () => {
   useEffect(() => {
     if (events && events.length > 0) return;
 
-    dispatch(fetchEvents());
+    dispatch(fetchEventsAdmin());
   }, [dispatch]);
 
   if (!user || user.role !== "admin") {

@@ -41,6 +41,7 @@ const EventCard = ({ itemList }) => {
         @media (max-width: 600px) {
           .event-grid {
             grid-template-columns: 1fr;
+            justify-items: center;
           }
         }
       `}</style>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useUser } from "../../lib/hooks";
 import Layout from "../../components/layout";
+import { MAX_FILE_SIZE } from "../../lib/common";
 
 const AddEvent = () => {
   const router = useRouter();
@@ -23,13 +24,40 @@ const AddEvent = () => {
   const [eventPrice, setEventPrice] = useState("");
   const [eventStatus, setEventStatus] = useState("confirmed");
   const [maxAttendees, setMaxAttendees] = useState("");
-  const [eventImgUrl, setEventImgUrl] = useState("/images/event3.jpeg");
+  const [eventImage, setEventImage] = useState(null);
 
   if (!user || user.role !== "admin") {
     return null;
   }
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (!file.type.match("image.*")) {
+        alert("Please select an image file.");
+        return;
+      }
+
+      if (file.size > MAX_FILE_SIZE) {
+        alert("File size should not exceed 2MB.");
+        return;
+      }
+
+      setEventImage(file);
+    }
+  };
+
   const handleSaveClick = async () => {
+    // console.log(eventName);
+    // console.log(eventDescription);
+    // console.log(eventDate);
+    // console.log(eventTime);
+    // console.log(eventLocation);
+    // console.log(eventPrice);
+    // console.log(eventStatus);
+    // console.log(maxAttendees);
+    // console.log(eventImage);
+
     if (
       !eventName ||
       !eventDescription ||
@@ -39,7 +67,7 @@ const AddEvent = () => {
       !eventPrice ||
       !eventStatus ||
       !maxAttendees ||
-      !eventImgUrl
+      !eventImage
     ) {
       alert("Please fill in all fields.");
       return;
@@ -54,26 +82,23 @@ const AddEvent = () => {
       )
     ).toISOString();
 
-    const event = {
-      eventName,
-      eventDate: isoDateWithMidnightUTC,
-      eventTime,
-      eventLocation,
-      eventStatus,
-      maxAttendees: Number(maxAttendees),
-      eventPrice: Number(eventPrice),
-      eventImgUrl,
-      eventOrg: user.username,
-      eventDescription,
-    };
+    const formData = new FormData();
+    formData.append("eventName", eventName);
+    formData.append("eventDate", isoDateWithMidnightUTC);
+    formData.append("eventTime", eventTime);
+    formData.append("eventLocation", eventLocation);
+    formData.append("eventStatus", eventStatus);
+    formData.append("maxAttendees", Number(maxAttendees));
+    formData.append("eventPrice", Number(eventPrice));
+    formData.append("eventOrg", user.username);
+    formData.append("eventDescription", eventDescription);
+    formData.append("eventImage", eventImage);
 
     try {
       const response = await fetch(`/api/events`, {
         method: "POST",
-        body: JSON.stringify(event),
-        headers: {
-          "Content-Type": "application/json",
-        },
+        body: formData,
+        enctype: "multipart/form-data",
       });
 
       if (response.status === 201) {
@@ -181,11 +206,11 @@ const AddEvent = () => {
       </div>
 
       <div className="add-field">
-        <label htmlFor="eventImgUrl">Image URL</label>
+        <label htmlFor="eventImage">Image</label>
         <input
-          type="text"
-          value={eventImgUrl}
-          onChange={(e) => setEventImgUrl(e.target.value)}
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
           required
         />
       </div>

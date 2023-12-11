@@ -122,6 +122,9 @@ const AdminHome = () => {
             margin-bottom: 1rem;
             min-width: 200px;
           }
+          .search-and-filter {
+            flex-direction: column;
+          }
         }
       `}</style>
     </Layout>

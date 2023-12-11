@@ -96,9 +96,16 @@ export async function updateEventById(id, eventData) {
 export async function deleteEventById(id) {
   try {
     await dbConnect();
-    const deletedEvent = await Event.deleteOne({ _id: id });
-    console.log("Event deleted", deletedEvent._id);
-    return { eventName: deletedEvent.eventName };
+
+    const eventToDelete = await Event.findById(id);
+    if (!eventToDelete) {
+      console.log("Event not found");
+      return null;
+    }
+
+    await Event.deleteOne({ _id: id });
+    console.log("Event deleted", eventToDelete._id);
+    return eventToDelete;
   } catch (err) {
     console.log("Error deleting event:", err);
     throw err;
