@@ -9,7 +9,6 @@ export default async function findAllAttendees(req, res) {
 
     const attendees = findAttendees(users, eventId);
     console.log(attendees);
-
     res.status(200).json({ attendees });
   } catch (error) {
     console.error(error);

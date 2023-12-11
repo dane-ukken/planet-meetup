@@ -49,6 +49,10 @@ const EventDetails = () => {
 
   if (!events) return <p>No event details available.</p>;
 
+  if (!events.find((e) => e._id === id)) {
+    return <p>Event not found.</p>;
+  }
+
   const event = events.find((e) => e._id === id);
   const isCancelled = event.eventStatus === "cancelled";
 
