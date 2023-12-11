@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import { User } from "../models/dbModels";
+import { User, Event } from "../models/dbModels";
 import dbConnect from "./db";
 
 export async function createUser({
@@ -54,8 +54,6 @@ export async function findUser({ username }) {
       path: "registeredEvents.event",
     })
     .then((user) => {
-      console.log(`found user`);
-      console.log(user);
       return user;
     })
     .catch((err) => {
@@ -63,6 +61,64 @@ export async function findUser({ username }) {
       return null;
     });
 }
+
+export const registerEvents = async (username) => {
+  await dbConnect();
+
+  try {
+    const user = await User.findOne({ username: username })
+    .populate({
+      path: "cart.event",
+    })
+    .populate({
+      path: "registeredEvents.event",
+    });
+    const cartEventIds = user.cart.map(e => ({ event: e.event._id }));
+    const registeredEvents = user.registeredEvents.map(e => ({ event: e.event._id }));
+    const updatedRegisteredEvents = [...registeredEvents, ...cartEventIds];
+    user.registeredEvents = updatedRegisteredEvents;
+    user.cart = [];
+    await user.save();
+
+    // Update the spots left for each event
+    for (const cartEvent of cartEventIds) {
+      const eventId = cartEvent.event;
+      const event = await Event.findById(eventId);
+      if (event.spotsLeft > 0) {
+        event.spotsLeft -= 1;
+        await event.save();
+      } else {
+        console.log('Error!!! User registered with zero spots');
+      }
+    }
+
+    return { status: 'success', message: 'Events registered successfully' };
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateCart = async (username, newCart) => {
+  await dbConnect();
+
+  try {
+    const updatedUser = await User.findOneAndUpdate(
+      { username: username },
+      { $set: { cart: newCart } },
+      { new: true, populate: { path: 'cart.event' } }
+    ).populate({
+      path: "cart.event",
+    })
+    .populate({
+      path: "registeredEvents.event",
+    });
+
+    return updatedUser;
+  } catch (error) {
+    console.error('Error updating cart:', error);
+    throw new Error('Error updating cart');
+  }
+};
 
 export function validatePassword(user, inputPassword) {
   const inputHash = crypto

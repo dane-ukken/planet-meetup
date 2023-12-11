@@ -5,6 +5,7 @@ import {
   fetchEvents,
   fetchEventsAdmin,
 } from "../../../store/features/events/eventSlice";
+import { addEventToCart } from "../../../store/features/user/userSlice";
 import { useUser } from "../../../lib/hooks";
 import Layout from "../../../components/layout";
 import {
@@ -92,6 +93,7 @@ const EventDetails = () => {
   };
 
   const handleAddToCartClick = async () => {
+    dispatch(addEventToCart(id));
     // await fetch(`/add-to-cart`); method: POST body: { userId: user._id, eventId: event._id }
   };
 
@@ -101,6 +103,10 @@ const EventDetails = () => {
 
   const handleUnRegisterClick = async () => {
     // await fetch(`/events/unregister`); method: POST body: { userId: user._id, eventId: event._id }
+  
+  }  
+  const handleAddEventToCart = (id) => {
+    dispatch(addEventToCart(id));
   };
 
   return (
@@ -162,7 +168,7 @@ const EventDetails = () => {
               Remove from Cart
             </button>
           ) : (
-            <button onClick={handleAddToCartClick}>Add to Cart</button>
+            <button onClick={() => handleAddEventToCart(event._id)}>Add to Cart</button>
           )}
         </div>
       )}
