@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { fetchEvents } from "../../../store/features/events/eventSlice";
+import { addEventToCart } from "../../../store/features/user/userSlice";
 import { useUser } from "../../../lib/hooks";
 import Layout from "../../../components/layout";
 import {
@@ -45,6 +46,11 @@ const EventDetails = () => {
 
   const handleViewAttendeesClick = (id) => {
     router.push(`/events/${id}/attendees`);
+  };
+
+  const handleAddEventToCart = (id) => {
+    console.log('Reached Function');
+    dispatch(addEventToCart(id));
   };
 
   return (
@@ -98,7 +104,7 @@ const EventDetails = () => {
 
       {user.role === "user" && (
         <div className="user-buttons">
-          <button>Add to Cart</button>
+          <button onClick={() => handleAddEventToCart(event._id)}>Add to Cart</button>
         </div>
       )}
 
