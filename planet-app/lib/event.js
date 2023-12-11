@@ -111,3 +111,20 @@ export async function deleteEventById(id) {
     throw err;
   }
 }
+
+export function findAttendees(users, eventId) {
+  const attendees = [];
+
+  users.forEach((user) => {
+    const registeredEvents = user.registeredEvents || [];
+
+    registeredEvents.forEach((ev) => {
+      if (ev.event == eventId) {
+        attendees.push({ username: user.username, email: user.email });
+      }
+    });
+  });
+
+  return attendees;
+}
+
