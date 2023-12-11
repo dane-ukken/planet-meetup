@@ -26,6 +26,7 @@ const EventCard = ({ itemList }) => {
           imageUrl={item.eventImgUrl}
           price={`$${item.eventPrice}`}
           spotsLeft={item.spotsLeft}
+          isCancelled={item.eventStatus === "cancelled"}
           iconName="add"
           onIconClick={(e) => {
             e.stopPropagation();
@@ -45,6 +46,7 @@ const EventCard = ({ itemList }) => {
         @media (max-width: 600px) {
           .event-grid {
             grid-template-columns: 1fr;
+            justify-items: center;
           }
         }
       `}</style>

@@ -11,6 +11,7 @@ const Card = ({
   spotsLeft,
   imageUrl,
   price,
+  isCancelled,
   iconName,
   onIconClick,
   onClickLink,
@@ -22,6 +23,9 @@ const Card = ({
           {imageUrl && (
             <div className="card-image">
               <img src={imageUrl} alt={title} />
+              {isCancelled && (
+                <div className="cancelled-overlay">Cancelled</div>
+              )}
             </div>
           )}
           <div className="card-content">
@@ -30,12 +34,13 @@ const Card = ({
               {formatDate(date)} at {formatTime(time)}
             </p>
             {location && <p className="card-location">{location}</p>}
-            {spotsLeft && (
-              <p className="card-spotsLeft">{formatSpotsLeftText(spotsLeft)}</p>
-            )}
+            <p className="card-spotsLeft">{formatSpotsLeftText(spotsLeft)}</p>
           </div>
           {iconName && (
-            <div className="card-action">
+            <div
+              className="card-action"
+              style={{ visibility: !spotsLeft ? "hidden" : "" }}
+            >
               <p>{price}</p>
               <button onClick={onIconClick}>
                 <span className="material-icons">{iconName}</span>
@@ -49,13 +54,39 @@ const Card = ({
         p {
           margin: 5px 0;
         }
+        .card-image {
+          width: 100%;
+          position: relative;
+          overflow: hidden;
+        }
+        .card-image::before {
+          content: "";
+          display: block;
+          padding-top: 66.66%; // Aspect ratio of 3:2
+        }
+        .cancelled-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(255, 0, 0, 0.6);
+          color: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
         .card {
           max-width: 300px;
           border: 1px solid #ddd;
           border-radius: 8px;
           overflow: hidden;
-          margin: auto;
+          // margin: auto;
           cursor: pointer;
+          display: flex;
+          flex-direction: column;
         }
         .card:hover {
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -75,8 +106,11 @@ const Card = ({
           margin-bottom: 0;
         }
         .card-image img {
+          position: absolute;
+          top: 0;
+          left: 0;
           width: 100%;
-          height: 200px;
+          height: 100%;
           object-fit: cover;
         }
         .card-content {
@@ -121,7 +155,7 @@ const Card = ({
           .card {
             min-width: 300px;
           }
-          .card-image img {
+          .card-image {
             height: auto;
           }
         }

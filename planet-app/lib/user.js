@@ -128,3 +128,17 @@ export function validatePassword(user, inputPassword) {
   console.log(`passwordsMatch: ${passwordsMatch}`);
   return passwordsMatch;
 }
+
+export async function getAllUsers() {
+  await dbConnect();
+
+  return User.find({})
+    .then((users) => {
+      console.log(`found users`);
+      return users;
+    })
+    .catch((err) => {
+      console.log(err);
+      return null;
+    });
+}

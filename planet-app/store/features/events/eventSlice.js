@@ -12,6 +12,18 @@ export const fetchEvents = createAsyncThunk("events/fetchEvents", async () => {
   return sortedEvents;
 });
 
+export const fetchEventsAdmin = createAsyncThunk(
+  "events/fetchEventsAdmin",
+  async () => {
+    const response = await fetch("/api/events");
+    const events = await response.json();
+    const sortedEvents = events.sort((a, b) => {
+      return new Date(a.eventDate) - new Date(b.eventDate);
+    });
+    return sortedEvents;
+  }
+);
+
 export const eventSlice = createSlice({
   name: "events",
   initialState: {
@@ -33,6 +45,18 @@ export const eventSlice = createSlice({
         state.loading = false;
       })
       .addCase(fetchEvents.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(fetchEventsAdmin.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchEventsAdmin.fulfilled, (state, action) => {
+        state.events = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchEventsAdmin.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });

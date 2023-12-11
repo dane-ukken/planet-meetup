@@ -1,22 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { fetchEvents } from "../../../store/features/events/eventSlice";
+import { fetchEventsAdmin } from "../../../store/features/events/eventSlice";
 import { useUser } from "../../../lib/hooks";
 import Layout from "../../../components/layout";
-import { formatDate, formatTime } from "../../../lib/common";
 
 const EventAttendees = () => {
   const router = useRouter();
   const { id } = router.query;
   const user = useUser();
+  const [attendees, setAttendees] = useState([]);
   const { events, loading, error } = useSelector((state) => state.events);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (events && events.length > 0) return;
 
-    dispatch(fetchEvents());
+    dispatch(fetchEventsAdmin());
   }, [dispatch]);
 
   if (!user || user.role !== "admin") {
@@ -34,10 +34,26 @@ const EventAttendees = () => {
     return null;
   }
 
+  useEffect(() => {
+    if (!event) return;
+    const fetchAttendees = async () => {
+      const response = await fetch(`/api/attendees?id=${event._id}`);
+      if (response.status !== 200) {
+        console.log("Error fetching attendees");
+        return;
+      }
+
+      const data = await response.json();
+      setAttendees(data.attendees);
+    };
+
+    fetchAttendees();
+  }, [event]);
+
   return (
     <Layout>
       <div className="top-bar">
-        <div style={{ margin: "0" }}>
+        <div>
           <button
             className="back-button"
             onClick={() => router.push(`/events/${id}`)}
@@ -49,14 +65,20 @@ const EventAttendees = () => {
 
       <h1>{event.eventName}</h1>
 
-      {/* <div className="attendees-list">
-        <div className="attendee">
-          <p>Attendee Name</p>
-          <p>Attendee Email</p>
-          <p>Attendee Phone</p>
-        </div>
-      </div> */}
       <p className="title-text">Attendees List</p>
+
+      {attendees.length > 0 ? (
+        <div className="attendees-list">
+          {attendees.map((attendee, index) => (
+            <div key={index} className="attendee">
+              <p>{attendee.username}</p>
+              <p>{attendee.email}</p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p>No attendees for this event (yet).</p>
+      )}
 
       <style jsx>{`
         .top-bar {
@@ -85,7 +107,7 @@ const EventAttendees = () => {
           marginbottom: 1rem;
         }
         .title-text {
-          margin: 0px;
+          margin: 1rem 0;
           font-size: 1.3rem;
         }
         .description {
@@ -99,13 +121,23 @@ const EventAttendees = () => {
           margin-bottom: 1rem;
         }
         button {
-          padding: 0.5rem 1rem;
-          font-size: 1.2rem;
+          padding: 0.75rem 1rem;
+          font-size: 1rem;
           background-color: #333;
           color: #fff;
           border: none;
           border-radius: 5px;
           cursor: pointer;
+        }
+        .attendees-list {
+          display: flex;
+          flex-direction: column;
+        }
+        .attendee {
+          border: 1px solid #ccc;
+          padding: 10px;
+          margin-bottom: 10px;
+          border-radius: 4px;
         }
 
         @media (max-width: 600px) {

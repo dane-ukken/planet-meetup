@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { fetchEvents } from "../../../store/features/events/eventSlice";
+import { fetchEvents, fetchEventsAdmin } from "../../../store/features/events/eventSlice";
 import { addEventToCart } from "../../../store/features/user/userSlice";
 import { useUser } from "../../../lib/hooks";
 import Layout from "../../../components/layout";
@@ -49,7 +49,6 @@ const EventDetails = () => {
   };
 
   const handleAddEventToCart = (id) => {
-    console.log('Reached Function');
     dispatch(addEventToCart(id));
   };
 
