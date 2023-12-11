@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { fetchEvents, fetchEventsAdmin } from "../../../store/features/events/eventSlice";
-import { addEventToCart } from "../../../store/features/user/userSlice";
+import { addEventToCart, deleteEventAndUpdateCart } from "../../../store/features/user/userSlice";
 import { useUser } from "../../../lib/hooks";
 import Layout from "../../../components/layout";
 import {
@@ -28,6 +28,12 @@ const EventDetails = () => {
     return null;
   }
 
+  const isRegistered = user.registeredEvents.length > 0
+    ? user.registeredEvents.find((e) => e.event._id === id)
+    : false;
+
+  const inCart = user.cart.length > 0 ? user.cart.find((e) => e.event._id === id) : false;
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
@@ -39,17 +45,48 @@ const EventDetails = () => {
     router.push(`/events/${id}/edit`);
   };
 
-  const handleDeleteClick = async (id) => {
-    // await fetch(`/events/${id}/delete`);
-    // router.push("/admin-dashboard");
+  const handleDeleteClick = async () => {
+    try {
+      const response = await fetch(`/api/events/${id}`, { method: "DELETE" });
+      if (response.status === 204) {
+        router.push("/admin-dashboard");
+      } else if (response.status === 400 || response.status === 404) {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const responseJson = await response.json();
+          console.log(responseJson);
+          alert(responseJson.message);
+        } else {
+          console.log(
+            `Received ${response.status} status without JSON content.`
+          );
+        }
+      } else {
+        console.log(
+          "Failed to delete the event. Status code:",
+          response.status
+        );
+      }
+    } catch (error) {
+      console.error("Failed to delete the event:", error);
+    }
   };
 
   const handleViewAttendeesClick = (id) => {
     router.push(`/events/${id}/attendees`);
   };
 
-  const handleAddEventToCart = (id) => {
+  const handleAddToCartClick = (id) => {
     dispatch(addEventToCart(id));
+  };
+
+  const handleRemoveFromCartClick = (eventId) => {
+    console.log('handleremove', eventId);
+    dispatch(deleteEventAndUpdateCart(eventId))
+  };
+
+  const handleUnRegisterClick = async () => {
+    // await fetch(`/events/unregister`); method: POST body: { userId: user._id, eventId: event._id }
   };
 
   return (
@@ -102,8 +139,19 @@ const EventDetails = () => {
       </p>
 
       {user.role === "user" && (
-        <div className="user-buttons">
-          <button onClick={() => handleAddEventToCart(event._id)}>Add to Cart</button>
+        <div
+          className="user-buttons"
+          style={{ visibility: !event.spotsLeft ? "hidden" : "" }}
+        >
+          {isRegistered ? (
+            <button onClick={handleUnRegisterClick}>Unregister</button>
+          ) : inCart ? (
+            <button onClick={() => handleRemoveFromCartClick(event._id)}>
+              Remove from Cart
+            </button>
+          ) : (
+            <button onClick={() => handleAddToCartClick(event._id)}>Add to Cart</button>
+          )}
         </div>
       )}
 
