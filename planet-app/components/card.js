@@ -45,7 +45,7 @@ const Card = ({
             {location && <p className="card-location">{location}</p>}
             <p className="card-spotsLeft">{formatSpotsLeftText(spotsLeft)}</p>
           </div>
-          {iconName && (
+          {!isHidden &&  (
             <div
               className="card-action"
               style={{ visibility: !spotsLeft || isHidden ? "hidden" : "" }}
@@ -54,6 +54,22 @@ const Card = ({
               <button onClick={onIconClick}>
                 <span className="material-icons">{iconName}</span>
               </button>
+            </div>
+          )}
+          {isRegistered && (
+            <div
+              style={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}
+              className="card-action"
+            >
+              <i className="material-icons bi bi-check2-circle"></i>
+            </div>
+          )}
+          {inCart && (
+            <div
+              style={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}
+              className="card-action"
+            >
+              <i className="bi bi-bag-fill"></i>
             </div>
           )}
         </div>
