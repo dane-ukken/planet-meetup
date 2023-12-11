@@ -2,9 +2,11 @@ import React from "react";
 import Link from "next/link";
 import "material-icons/iconfont/material-icons.css";
 import { formatDate, formatSpotsLeftText, formatTime } from "../lib/common";
+import { useUser } from "../lib/hooks";
 
 const Card = ({
   title,
+  id,
   date,
   time,
   location,
@@ -16,6 +18,13 @@ const Card = ({
   onIconClick,
   onClickLink,
 }) => {
+  const user = useUser();
+  const isRegistered = user.registeredEvents.length > 0
+  ? user.registeredEvents.find((e) => e.event._id === id)
+  : false;
+  const inCart = user.cart.length > 0 ? user.cart.find((e) => e.event._id === id) : false;
+  const isHidden = isRegistered || inCart;
+
   return (
     <>
       <Link href={onClickLink} legacyBehavior>
@@ -39,7 +48,7 @@ const Card = ({
           {iconName && (
             <div
               className="card-action"
-              style={{ visibility: !spotsLeft ? "hidden" : "" }}
+              style={{ visibility: !spotsLeft || isHidden ? "hidden" : "" }}
             >
               <p>{price}</p>
               <button onClick={onIconClick}>

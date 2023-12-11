@@ -16,9 +16,10 @@ const EventCard = ({ itemList }) => {
 
   return (
     <div className="event-grid">
-      {itemList.map((item, index) => (
+      {itemList.map((item, index) => ( 
         <Card
           key={index}
+          id={item._id}
           title={item.eventName}
           date={item.eventDate}
           time={item.eventTime}
