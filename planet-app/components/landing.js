@@ -89,6 +89,10 @@ const Landing = () => (
           min-width: 120px;
           font-size: 1rem;
         }
+
+        h1 {
+          font-size: 1.5em;
+        }
       }
     `}</style>
   </div>

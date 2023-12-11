@@ -153,7 +153,7 @@ const Card = ({
 
         @media (max-width: 600px) {
           .card {
-            min-width: 300px;
+            min-width: 350px;
           }
           .card-image {
             height: auto;

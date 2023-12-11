@@ -19,19 +19,79 @@ const Form = ({
   });
   const [isPasswordMatch, setIsPasswordMatch] = useState(false);
 
+  const passwordRules = [
+    {
+      id: "minLength",
+      message: "At least 8 characters",
+      test: (value) => value.length >= 8,
+    },
+    {
+      id: "number",
+      message: "Contains a number",
+      test: (value) => /\d/.test(value),
+    },
+    {
+      id: "uppercase",
+      message: "Contains an uppercase letter",
+      test: (value) => /[A-Z]/.test(value),
+    },
+    {
+      id: "bothPasswordMatch",
+      message: "Both passwords must match",
+      test: (value) => value === formFields.rpassword,
+    },
+  ];
+
+  const [passwordRulesMet, setPasswordRulesMet] = useState(
+    passwordRules.reduce((acc, rule) => {
+      acc[rule.id] = false;
+      return acc;
+    }, {})
+  );
+
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormFields({ ...formFields, [name]: value });
+    setFormFields((prevFields) => {
+      const updatedFields = { ...prevFields, [name]: value };
 
-    if (name === "password") {
-      setIsPasswordMatch(value === formFields.rpassword && value.length >= 8);
-    } else if (name === "rpassword") {
-      setIsPasswordMatch(value === formFields.password && value.length >= 8);
+      if (name === "password" || name === "rpassword") {
+        setIsPasswordMatch(updatedFields.password === updatedFields.rpassword);
+
+        if (name === "password") {
+          const updatedRules = { ...passwordRulesMet };
+          passwordRules.forEach((rule) => {
+            updatedRules[rule.id] = rule.test(value);
+            if (rule.id === "bothPasswordMatch") {
+              updatedRules[rule.id] =
+                updatedFields.password === updatedFields.rpassword;
+            }
+          });
+          setPasswordRulesMet(updatedRules);
+        }
+      }
+
+      return updatedFields;
+    });
+  };
+
+  const canSubmit =
+    Object.values(passwordRulesMet).every(Boolean) && isPasswordMatch;
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (isLogin) {
+      onSubmit(event);
+    } else {
+      if (!canSubmit) {
+        alert("Please fill in all fields correctly");
+        return;
+      }
+      onSubmit(event);
     }
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={handleSubmit}>
       <label>
         <span>Username</span>
         <input
@@ -59,7 +119,6 @@ const Form = ({
           <label>
             <div className="signup-password-label">
               <span>Password</span>
-              {isPasswordMatch && <span> ☑️</span>}
             </div>
             <input
               type="password"
@@ -68,11 +127,20 @@ const Form = ({
               onChange={handleChange}
               required
             />
+            <ul>
+              {passwordRules.map((rule) => (
+                <li
+                  key={rule.id}
+                  style={{ color: passwordRulesMet[rule.id] ? "green" : "red" }}
+                >
+                  {rule.message}
+                </li>
+              ))}
+            </ul>
           </label>
           <label>
             <div className="signup-password-label">
               <span>Repeat password</span>
-              {isPasswordMatch && <span> ☑️</span>}
             </div>
             <input
               type="password"
@@ -112,16 +180,14 @@ const Form = ({
               required
             />
           </label>
-          <label>
-            <div style={{ display: "flex" }}>
-              <input
-                type="checkbox"
-                name="role"
-                value={formFields.role}
-                onChange={handleChange}
-              />
-              <span style={{ marginLeft: "1%" }}> Sign up as organizer</span>
-            </div>
+          <label className="role-checkbox">
+            <input
+              type="checkbox"
+              name="role"
+              value={formFields.role}
+              onChange={handleChange}
+            />
+            <span className="role-label">Sign up as organizer</span>
           </label>
         </>
       )}
@@ -206,11 +272,55 @@ const Form = ({
           color: white;
           border-color: #4caf50;
         }
+        ul {
+          margin: 0 0 1.2rem;
+        }
 
         #login-success-button {
           background-color: #4caf50;
           color: white;
           border-color: #4caf50;
+        }
+
+        .role-checkbox {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0rem 0 3rem;
+        }
+
+        .role-checkbox input[type="checkbox"] {
+          margin-right: 0.5rem;
+        }
+
+        .role-label {
+          font-weight: 600;
+          color: #36454f;
+        }
+
+        @media (max-width: 600px) {
+          .signup-password-label,
+          label > span,
+          .role-label {
+            font-size: 14px;
+          }
+
+          input {
+            padding: 6px;
+            margin-bottom: 0.8rem;
+          }
+
+          .role-checkbox {
+            margin: 1rem 0 2rem;
+          }
+
+          .submit > button {
+            padding: 0.4rem 0.8rem;
+          }
+
+          .error {
+            font-size: 14px;
+          }
         }
       `}</style>
     </form>
