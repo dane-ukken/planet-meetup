@@ -28,7 +28,7 @@ const CartPage = () => {
         </>
       ): (
       <>
-      <h2>You have No Events in your Cart</h2>
+      <p>You have No Events in your Cart</p>
       </>)}
       <style jsx>{`
         h1 {

@@ -1,8 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { fetchEvents, fetchEventsAdmin } from "../../../store/features/events/eventSlice";
-import { addEventToCart, deleteEventAndUpdateCart, unregisterAndUpdate } from "../../../store/features/user/userSlice";
+import {
+  fetchEvents,
+  fetchEventsAdmin,
+} from "../../../store/features/events/eventSlice";
+import {
+  addEventToCart,
+  deleteEventAndUpdateCart,
+  unregisterAndUpdate,
+} from "../../../store/features/user/userSlice";
 import { useUser } from "../../../lib/hooks";
 import Layout from "../../../components/layout";
 import {
@@ -28,11 +35,15 @@ const EventDetails = () => {
     return null;
   }
 
-  const isRegistered = user.registeredEvents && user.registeredEvents.length > 0
-    ? user.registeredEvents.find((e) => e.event._id === id)
-    : false;
+  const isRegistered =
+    user.registeredEvents && user.registeredEvents.length > 0
+      ? user.registeredEvents.find((e) => e.event._id === id)
+      : false;
 
-  const inCart = user.cart && user.cart.length > 0 ? user.cart.find((e) => e.event._id === id) : false;
+  const inCart =
+    user.cart && user.cart.length > 0
+      ? user.cart.find((e) => e.event._id === id)
+      : false;
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -81,11 +92,13 @@ const EventDetails = () => {
   };
 
   const handleRemoveFromCartClick = (eventId) => {
-    dispatch(deleteEventAndUpdateCart(eventId))
+    dispatch(deleteEventAndUpdateCart(eventId));
   };
 
   const handleUnRegisterClick = (eventId) => {
     dispatch(unregisterAndUpdate(eventId));
+    dispatch(fetchEvents());
+    router.push("/user/my-events");
   };
 
   return (
@@ -148,7 +161,9 @@ const EventDetails = () => {
               Remove from Cart
             </button>
           ) : (
-            <button onClick={() => handleAddToCartClick(event._id)}>Add to Cart</button>
+            <button onClick={() => handleAddToCartClick(event._id)}>
+              Add to Cart
+            </button>
           )}
         </div>
       )}
