@@ -32,7 +32,7 @@ const CartTable = ({ cartItems }) => {
           <tbody>
             {cartItems.map(item => (
               <tr key={item._id}>
-                <td><img src={item.eventImgUrl} alt={item.eventName} style={{ width: '50px', height: '50px' }} /></td>
+                <td><img src={item.eventImgUrl} alt={item.eventName} style={{ width: '100px', height: '100px' }} /></td>
                 <td>{item.eventName}</td>
                 <td>${item.eventPrice}</td>
                 <td>

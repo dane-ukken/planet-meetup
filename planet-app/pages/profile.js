@@ -18,7 +18,7 @@ const Profile = () => {
       <h1>Profile Details</h1>
       {user && (
         <div className="profile-field-main-container">
-          <div className="profile-field-container">
+          <div className="profile-field-container" >
             <h3>Username</h3>
             <p>{user.username}</p>
           </div>
@@ -63,6 +63,7 @@ const Profile = () => {
           font-size: 2.2rem;
           color: #333;
           font-weight: 600;
+          margin-bottom: 3rem;
         }
 
         h3 {

@@ -42,7 +42,7 @@ const CheckoutPage = () => {
       <button className='btn btn-outline-success'
         onClick={handleRegisterEvents}
         >
-            Register
+            Register and Pay
         </button>
       }
       {loading && <p>Loading...</p>}
@@ -55,6 +55,10 @@ const CheckoutPage = () => {
         }
         .check-table tr {
             border-bottom: 1px solid #f0f0f0; /* Faint line for row separation */
+          }
+          .btn {
+            margin: 1rem 0;
+            width: 100%;
           }
       `}</style>
     </Layout>

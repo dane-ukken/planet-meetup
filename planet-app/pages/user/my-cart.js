@@ -40,6 +40,10 @@ const CartPage = () => {
         .check-table tr {
             border-bottom: 1px solid #f0f0f0; /* Faint line for row separation */
           }
+          .btn {
+            margin: 1rem 0;
+            width: 100%;
+          }
       `}</style>
     </Layout>
     
