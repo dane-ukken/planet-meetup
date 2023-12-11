@@ -98,6 +98,34 @@ export const registerEvents = async (username) => {
   }
 };
 
+export const unregisterEvents = async (username, eventId, updatedRegisteredEvents) => {
+  await dbConnect();
+
+  try {
+    console.log('reached db place');
+    const updatedUser = await User.findOneAndUpdate(
+      { username: username },
+      { $set: { registeredEvents: updatedRegisteredEvents } },
+      { new: true, populate: { path: 'registeredEvents.event' } }
+    ).populate({
+      path: "cart.event",
+    })
+    .populate({
+      path: "registeredEvents.event",
+    });
+    const event = await Event.findById(eventId);
+    if (event.spotsLeft < event.maxAttendees) {
+      event.spotsLeft += 1;
+      await event.save();
+    } else {
+      console.log('Error!!! More than maxAttendees spots');
+    }
+    return updatedUser;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const updateCart = async (username, newCart) => {
   await dbConnect();
 
