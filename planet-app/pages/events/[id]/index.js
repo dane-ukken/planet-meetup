@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { fetchEvents, fetchEventsAdmin } from "../../../store/features/events/eventSlice";
-import { addEventToCart, deleteEventAndUpdateCart } from "../../../store/features/user/userSlice";
+import { addEventToCart, deleteEventAndUpdateCart, unregisterAndUpdate } from "../../../store/features/user/userSlice";
 import { useUser } from "../../../lib/hooks";
 import Layout from "../../../components/layout";
 import {
@@ -28,11 +28,11 @@ const EventDetails = () => {
     return null;
   }
 
-  const isRegistered = user.registeredEvents.length > 0
+  const isRegistered = user.registeredEvents && user.registeredEvents.length > 0
     ? user.registeredEvents.find((e) => e.event._id === id)
     : false;
 
-  const inCart = user.cart.length > 0 ? user.cart.find((e) => e.event._id === id) : false;
+  const inCart = user.cart && user.cart.length > 0 ? user.cart.find((e) => e.event._id === id) : false;
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -81,12 +81,11 @@ const EventDetails = () => {
   };
 
   const handleRemoveFromCartClick = (eventId) => {
-    console.log('handleremove', eventId);
     dispatch(deleteEventAndUpdateCart(eventId))
   };
 
-  const handleUnRegisterClick = async () => {
-    // await fetch(`/events/unregister`); method: POST body: { userId: user._id, eventId: event._id }
+  const handleUnRegisterClick = (eventId) => {
+    dispatch(unregisterAndUpdate(eventId));
   };
 
   return (
@@ -144,7 +143,9 @@ const EventDetails = () => {
           style={{ visibility: !event.spotsLeft ? "hidden" : "" }}
         >
           {isRegistered ? (
-            <button onClick={handleUnRegisterClick}>Unregister</button>
+            <button onClick={() => handleUnRegisterClick(event._id)}>
+              Unregister
+            </button>
           ) : inCart ? (
             <button onClick={() => handleRemoveFromCartClick(event._id)}>
               Remove from Cart
