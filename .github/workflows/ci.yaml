@@ -1,0 +1,24 @@
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build and Test Application
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v3
+
+      - name: Install Project Dependencies
+        uses: bahmutov/npm-install@v1
+
+      - name: Generate Production Build
+        run: npm run build
