@@ -1,10 +1,29 @@
 # Planet - Event Planner
 
-An event planner application created using NextJS, React, and MongoDB.
+A robust event planner application built with NextJS, React, MongoDB, and Redux, Planet offers a streamlined experience for both personal and professional event planning. It combines an intuitive interface with powerful backend features. With Passport.js, it efficiently manages user and admin roles, ensuring secure and reliable access for different users.
 
-## How to Use
+<img src="promos/planet_demo.gif"  alt="an animated gif demonstrating planet app functionality">
 
-To run this application, follow these steps:
+## Built With
+
+- [NextJS](https://nextjs.org/)
+- [React](https://reactjs.org/)
+- [MongoDB](https://www.mongodb.com/)
+- [Redux](https://redux.js.org/)
+- [Passport](http://www.passportjs.org/)
+- [SWR](https://swr.vercel.app/)
+- [Material Icons](https://material-ui.com/components/material-icons/)
+- [Bootstrap](https://getbootstrap.com/)
+- [Docker](https://www.docker.com/)
+
+## Setup and Usage
+
+### Prerequisites
+
+- Docker
+- Node.js
+
+### Installation
 
 1. Launch the Docker containers:
 
@@ -18,59 +37,55 @@ To run this application, follow these steps:
    npm install
    ```
 
-3. Build and run the application:
+### Running the App
 
-   ```
-   npm run build
-   npm start
-   ```
+- Production Build:
 
-4. (Optional) Run the application in development mode:
+  ```
+  npm run build
+  npm start
+  ```
 
-   ```
-   npm run dev
-   ```
+- Development Mode:
 
-After these steps, open your web browser and go to http://localhost:3000/.
+  ```
+  npm run dev
+  ```
 
-## Stop the Database Container:
+  Visit http://localhost:3000/ to view the application.
 
-When you need to stop the database container, run:
+## Maintenance
 
-```
-docker compose down
-```
+- Stop the containers:
 
-## Reset the database
+  ```
+  docker compose down
+  ```
 
-To reset the database, use the following command. This will remove all the data and restart the containers:
+- Reset the database:
 
-```
-docker compose down -v && docker compose up -d
-```
+  ```
+  docker compose down -v && docker compose up -d
+  ```
 
-## Seed the database
+- Seed the database:
 
-Send a request to the following endpoint to seed the database with mock data:
+  ```
+  curl -X POST http://localhost:3000/api/seedMockData
+  ```
 
-```
-curl -X POST http://localhost:3000/api/seedMockData
-```
+## Sample Credentials
 
-Sample customer credentials:
+- Customer:
 
-```
-username: customer
-password: password
-```
+  ```
+  username: customer
+  password: password
+  ```
 
-Sample admin credentials:
+- Admin:
 
-```
-username: admin
-password: password
-```
-
-## Help
-
-Make sure Docker is installed and running on your system before executing these commands. These steps are intended for setting up a local development environment.
+  ```
+  username: admin
+  password: password
+  ```

@@ -1,0 +1,56 @@
+[
+  {
+    "createdAt": "2023-12-10T05:49:21.162Z",
+    "username": "customer",
+    "email": "customer@planet.com",
+    "phone": "9000000000",
+    "address": "Location C",
+    "role": "user",
+    "cart": [
+      { "event": "507f1f77bcf86cd799439015" },
+      { "event": "507f1f77bcf86cd799439016" }
+    ],
+    "registeredEvents": [
+      { "event": "507f1f77bcf86cd799439011" },
+      { "event": "507f1f77bcf86cd799439012" }
+    ],
+    "hash": "bcfbb808cdc64b84a8f723c5ab78826a0fdda1fcaf4219084d51576ba831781495885aad1b966c1bb3a565f99f62ca39bee8306ebef5734896341f304b041640",
+    "salt": "aa490c12e262c52938873dbf6830ecf2"
+  },
+  {
+    "createdAt": "2023-12-10T05:49:21.162Z",
+    "username": "admin",
+    "email": "admin@planet.com",
+    "phone": "9999999999",
+    "address": "Location A",
+    "role": "admin",
+    "cart": [],
+    "registered_events": [],
+    "hash": "bcfbb808cdc64b84a8f723c5ab78826a0fdda1fcaf4219084d51576ba831781495885aad1b966c1bb3a565f99f62ca39bee8306ebef5734896341f304b041640",
+    "salt": "aa490c12e262c52938873dbf6830ecf2"
+  },
+  {
+    "createdAt": "2023-12-10T05:49:21.162Z",
+    "username": "Organization Y",
+    "email": "OrganizationY@planet.com",
+    "phone": "9999999999",
+    "address": "Location A",
+    "role": "admin",
+    "cart": [],
+    "registered_events": [],
+    "hash": "bcfbb808cdc64b84a8f723c5ab78826a0fdda1fcaf4219084d51576ba831781495885aad1b966c1bb3a565f99f62ca39bee8306ebef5734896341f304b041640",
+    "salt": "aa490c12e262c52938873dbf6830ecf2"
+  },
+  {
+    "createdAt": "2023-12-10T05:49:21.162Z",
+    "username": "Organization Z",
+    "email": "OrganizationZ@planet.com",
+    "phone": "9999999999",
+    "address": "Location A",
+    "role": "admin",
+    "cart": [],
+    "registered_events": [],
+    "hash": "bcfbb808cdc64b84a8f723c5ab78826a0fdda1fcaf4219084d51576ba831781495885aad1b966c1bb3a565f99f62ca39bee8306ebef5734896341f304b041640",
+    "salt": "aa490c12e262c52938873dbf6830ecf2"
+  }
+]
