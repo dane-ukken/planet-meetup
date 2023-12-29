@@ -18,7 +18,6 @@
 .DS_Store
 *.pem
 public/uploads/*
-package-lock.json
 
 # debug
 npm-debug.log*
