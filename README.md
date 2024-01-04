@@ -1,12 +1,12 @@
 # Planet - Event Planner
 
-A robust event planner application built with NextJS, React, MongoDB, and Redux, Planet offers a streamlined experience for both personal and professional event planning. It combines an intuitive interface with powerful backend features. With Passport.js, it efficiently manages user and admin roles, ensuring secure and reliable access for different users.
+A robust event planner application built with Next.js, React, MongoDB, and Redux, Planet offers a streamlined experience for both personal and professional event planning. It combines an intuitive interface with powerful backend features. With Passport.js, it efficiently manages user and admin roles, ensuring secure and reliable access for different users.
 
 <img src="promos/planet_demo.gif"  alt="an animated gif demonstrating planet app functionality">
 
 ## Built With
 
-- [NextJS](https://nextjs.org/)
+- [Next.js](https://nextjs.org/)
 - [React](https://reactjs.org/)
 - [MongoDB](https://www.mongodb.com/)
 - [Redux](https://redux.js.org/)
